@@ -1,0 +1,54 @@
+@import "./variables";
+
+.play-area-container {
+  position: relative;
+  margin-top: 6rem;
+  height: 400px;
+  background-image: url("../resources/bg-triangle.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 250px;
+}
+
+.choice-container {
+  padding: 25px;
+  width: max-content;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.paper {
+  background-color: blue;
+  top: 25px;
+  left: 40px;
+}
+
+.scissors {
+  background-color: orange;
+  top: 25px;
+  left: 245px;
+}
+
+.rock {
+  background-color: red;
+  top: 190px;
+  left: 140px;
+}
+
+.choice-white-bg {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.choice-white-bg img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+  width: 50px;
+  height: 50px;
+}
