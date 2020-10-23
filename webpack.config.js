@@ -35,9 +35,17 @@ module.exports = {
           {
             // automaticall loads bundle.js
             loader: "html-loader",
-            options: { minimize: true },
+            // options: { minimize: true },
           },
         ],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: { loader: "file-loader" },
+      },
+      {
+        test: /\.svg/,
+        type: "asset/inline",
       },
     ],
   },

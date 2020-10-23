@@ -1,1 +1,1 @@
-(()=>{var r={699:()=>{}},o={};(function e(t){if(o[t])return o[t].exports;var l=o[t]={exports:{}};return r[t](l,l.exports,e),l.exports})(699),console.log("Hello World")})();
+console.log("Hello World");
