@@ -1,0 +1,46 @@
+@import "./variables";
+
+.game-board {
+  position: relative;
+  height: 600px;
+}
+
+.background-effects-container {
+  position: absolute;
+}
+
+.highlight-container {
+  position: relative;
+}
+
+.highlight {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.highlight-sm {
+  top: $highlight-orign-top - $highlight-radius-sm;
+  left: $highlight-orign-left - $highlight-radius-sm;
+  width: $highlight-radius-sm * 2;
+  height: $highlight-radius-sm * 2;
+  z-index: 10;
+  background-color: #ffffff12;
+}
+
+.highlight-md {
+  top: $highlight-orign-top - $highlight-radius-md;
+  left: $highlight-orign-left - $highlight-radius-md;
+  width: $highlight-radius-md * 2;
+  height: $highlight-radius-md * 2;
+  z-index: 5;
+  background-color: #ffffff14;
+}
+
+.highlight-lg {
+  top: $highlight-orign-top - $highlight-radius-lg;
+  left: $highlight-orign-left - $highlight-radius-lg;
+  width: $highlight-radius-lg * 2;
+  height: $highlight-radius-lg * 2;
+  z-index: 0;
+  background-color: #ffffff0f;
+}
