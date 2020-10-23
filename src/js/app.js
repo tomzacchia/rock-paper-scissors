@@ -1,3 +1,3 @@
-import "../css/styles.scss";
+require("../scss/styles.scss");
 
 console.log("Hello World");

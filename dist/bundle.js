@@ -1,17 +1,1 @@
-/*
- * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
- * This devtool is not neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-/******/ (() => { // webpackBootstrap
-/*!***********************!*\
-  !*** ./src/js/app.js ***!
-  \***********************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements:  */
-eval("console.log(\"Hello World\");\n\n\n//# sourceURL=webpack://rock-paper-scissors/./src/js/app.js?");
-/******/ })()
-;
+(()=>{var r={699:()=>{}},o={};(function e(t){if(o[t])return o[t].exports;var l=o[t]={exports:{}};return r[t](l,l.exports,e),l.exports})(699),console.log("Hello World")})();
