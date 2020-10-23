@@ -40,7 +40,7 @@ module.exports = {
           {
             // automaticall loads bundle.js
             loader: "html-loader",
-            // options: { minimize: true },
+            options: { minimize: true },
           },
         ],
       },
