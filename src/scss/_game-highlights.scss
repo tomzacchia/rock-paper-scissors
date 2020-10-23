@@ -7,10 +7,12 @@
 
 .background-effects-container {
   position: absolute;
+  width: 100%;
 }
 
 .highlight-container {
   position: relative;
+  width: 100%;
 }
 
 .highlight {
@@ -30,6 +32,10 @@
   left: $highlight-orign-left - $highlight-radius-sm;
 }
 
+.highlight-sm-right {
+  right: -($highlight-orign-left - $highlight-radius-sm);
+}
+
 .highlight-md {
   top: $highlight-orign-top - $highlight-radius-md;
   width: $highlight-radius-md * 2;
@@ -42,6 +48,10 @@
   left: $highlight-orign-left - $highlight-radius-md;
 }
 
+.highlight-md-right {
+  right: ($highlight-orign-left - $highlight-radius-md);
+}
+
 .highlight-lg {
   top: $highlight-orign-top - $highlight-radius-lg;
   width: $highlight-radius-lg * 2;
@@ -52,4 +62,8 @@
 
 .highlight-lg-left {
   left: $highlight-orign-left - $highlight-radius-lg;
+}
+
+.highlight-lg-right {
+  right: ($highlight-orign-left - $highlight-radius-lg);
 }
