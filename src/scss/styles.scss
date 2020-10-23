@@ -1,5 +1,17 @@
-$bg: red;
+@import "./header";
 
 body {
-  background-color: $bg;
+  margin: 0;
+  padding-top: 2rem;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  background-image: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
+}
+
+// reset default styles
+h1,
+h2,
+p {
+  margin: 0;
 }

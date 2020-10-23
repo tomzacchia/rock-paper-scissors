@@ -1,0 +1,32 @@
+@import "./style-guide";
+
+.header {
+  padding: 12px 18px;
+  margin: 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-radius: $default-border-radius;
+  border: solid thin $header-outline;
+  color: white;
+}
+
+.header .header-title {
+  height: max-content;
+}
+
+.score-container {
+  padding: 12px 36px;
+  border-radius: $default-border-radius;
+  background-color: white;
+}
+
+.score-container p {
+  color: $score-text;
+  text-align: center;
+}
+
+.score-container h1 {
+  color: $dark-text;
+  text-align: center;
+  font-size: 2rem;
+}
