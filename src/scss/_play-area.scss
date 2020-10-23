@@ -1,13 +1,46 @@
 @import "./variables";
+@import "./mixins";
+
+$max-choices-container-width: 768px;
 
 .play-area-container {
   position: relative;
   margin-top: 6rem;
   height: 400px;
+  // background-image: url("../resources/bg-triangle.svg");
+  // background-repeat: no-repeat;
+  // background-position: center center;
+  // background-size: 250px;
+}
+
+.play-area-bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  max-width: $max-choices-container-width;
   background-image: url("../resources/bg-triangle.svg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 250px;
+}
+
+.choices-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  max-width: $max-choices-container-width;
+}
+
+@include tablet {
+  .play-area-bg {
+    left: 50%;
+    margin-left: -($max-choices-container-width/2);
+  }
+
+  .choices-container {
+    left: 50%;
+    margin-left: -($max-choices-container-width/2);
+  }
 }
 
 .choice-container {
@@ -18,21 +51,24 @@
 }
 
 .paper {
-  background-color: blue;
   top: 25px;
-  left: 40px;
+  left: 50%;
+  margin-left: -150px;
+  background-color: blue;
 }
 
 .scissors {
-  background-color: orange;
   top: 25px;
-  left: 245px;
+  left: 50%;
+  margin-left: 14px;
+  background-color: orange;
 }
 
 .rock {
-  background-color: red;
   top: 190px;
-  left: 140px;
+  left: 50%;
+  margin-left: -65px;
+  background-color: red;
 }
 
 .choice-white-bg {
