@@ -1,8 +1,16 @@
 @import "./variables";
 @import "./mixins";
 
+$highlight-radius-sm: 100px;
+$highlight-radius-md: 125px;
+$highlight-radius-lg: 150px;
+$highlight-orign-top: 200px;
+$highlight-orign-left: 120px;
+$highlight-origin-right: $highlight-orign-left;
+
 .game-board {
   position: relative;
+  overflow: hidden;
 }
 
 .background-effects-container {

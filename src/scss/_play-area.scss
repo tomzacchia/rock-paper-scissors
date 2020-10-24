@@ -2,6 +2,8 @@
 @import "./mixins";
 
 $max-choices-container-width: 768px;
+$choice-white-bg-diameter: 120px;
+$choice-container-padding: 25px;
 
 .play-area-container {
   position: relative;
@@ -44,7 +46,7 @@ $max-choices-container-width: 768px;
 }
 
 .choice-container {
-  padding: 25px;
+  padding: $choice-container-padding;
   width: max-content;
   border-radius: 50%;
   position: absolute;
@@ -53,28 +55,28 @@ $max-choices-container-width: 768px;
 .paper {
   top: 25px;
   left: 50%;
-  margin-left: -150px;
+  margin-left: -185px;
   background-color: blue;
 }
 
 .scissors {
   top: 25px;
   left: 50%;
-  margin-left: 14px;
+  margin-left: 15px;
   background-color: orange;
 }
 
 .rock {
-  top: 190px;
+  top: 210px;
   left: 50%;
-  margin-left: -65px;
+  margin-left: -(($choice-container-padding * 2) + $choice-white-bg-diameter) /2;
   background-color: red;
 }
 
 .choice-white-bg {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: $choice-white-bg-diameter;
+  height: $choice-white-bg-diameter;
   border-radius: 50%;
   background-color: white;
 }
