@@ -1,12 +1,12 @@
 @import "./variables";
 @import "./mixins";
 
-$highlight-radius-sm: 100px;
-$highlight-radius-md: 125px;
-$highlight-radius-lg: 150px;
-$highlight-orign-top: 200px;
-$highlight-orign-left: 120px;
-$highlight-origin-right: $highlight-orign-left;
+$highlight-radius-sm: 80px;
+$highlight-radius-md: 110px;
+$highlight-radius-lg: 140px;
+$highlight-origin-top: 90px;
+$highlight-origin-left: 105px;
+$highlight-origin-right: 105px;
 
 .game-board {
   position: relative;
@@ -21,6 +21,7 @@ $highlight-origin-right: $highlight-orign-left;
 .highlight-container {
   position: relative;
   margin: 0 auto;
+  margin-top: 6rem;
   width: 100%;
   max-width: 768px;
   border: solid thin red;
@@ -29,52 +30,53 @@ $highlight-origin-right: $highlight-orign-left;
 .highlight {
   position: absolute;
   border-radius: 50%;
+  left: 50%;
 }
 
 .highlight-sm {
-  top: $highlight-orign-top - $highlight-radius-sm;
+  top: -($highlight-radius-sm - $highlight-origin-top);
   width: $highlight-radius-sm * 2;
   height: $highlight-radius-sm * 2;
   z-index: 10;
   background-color: #ffffff12;
 }
 
-.highlight-sm-left {
-  left: $highlight-orign-left - $highlight-radius-sm;
-}
-
-.highlight-sm-right {
-  right: -($highlight-orign-left - $highlight-radius-sm);
-}
-
 .highlight-md {
-  top: $highlight-orign-top - $highlight-radius-md;
+  top: -($highlight-radius-md - $highlight-origin-top);
   width: $highlight-radius-md * 2;
   height: $highlight-radius-md * 2;
   z-index: 5;
   background-color: #ffffff14;
 }
 
-.highlight-md-left {
-  left: $highlight-orign-left - $highlight-radius-md;
-}
-
-.highlight-md-right {
-  right: ($highlight-orign-left - $highlight-radius-md);
-}
-
 .highlight-lg {
-  top: $highlight-orign-top - $highlight-radius-lg;
+  top: -($highlight-radius-lg - $highlight-origin-top);
   width: $highlight-radius-lg * 2;
   height: $highlight-radius-lg * 2;
   z-index: 0;
   background-color: #ffffff0f;
 }
 
+.highlight-sm-left {
+  margin-left: -($highlight-origin-left + $highlight-radius-sm);
+}
+
+.highlight-md-left {
+  margin-left: -($highlight-origin-left + $highlight-radius-md);
+}
+
 .highlight-lg-left {
-  left: $highlight-orign-left - $highlight-radius-lg;
+  margin-left: -($highlight-origin-left + $highlight-radius-lg);
+}
+
+.highlight-sm-right {
+  margin-left: ($highlight-origin-right - $highlight-radius-sm);
+}
+
+.highlight-md-right {
+  margin-left: ($highlight-origin-right - $highlight-radius-md);
 }
 
 .highlight-lg-right {
-  right: ($highlight-orign-left - $highlight-radius-lg);
+  margin-left: ($highlight-origin-right - $highlight-radius-lg);
 }
