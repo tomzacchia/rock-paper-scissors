@@ -11,17 +11,6 @@ $highlight-origin-right: 105px;
 $highlight-origin-left-tablet: 200px;
 $highlight-origin-right-tablet: 200px;
 
-.game-board {
-  position: relative;
-  margin-top: 6rem;
-}
-
-@include tablet {
-  .game-board {
-    margin-top: 10rem;
-  }
-}
-
 .background-effects-container {
   position: absolute;
   width: 100%;

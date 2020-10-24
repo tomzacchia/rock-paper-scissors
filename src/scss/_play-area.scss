@@ -34,6 +34,10 @@ $choice-container-padding: 15px;
   border-radius: 50%;
   position: absolute;
   transition: all 2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .paper {
@@ -63,6 +67,10 @@ $choice-container-padding: 15px;
   height: $choice-white-bg-diameter;
   border-radius: 50%;
   background-color: white;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .choice-white-bg img {
@@ -73,6 +81,11 @@ $choice-container-padding: 15px;
   margin-left: -25px;
   width: 50px;
   height: 50px;
+  z-index: 50;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .animate-player-choice {
