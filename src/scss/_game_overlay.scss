@@ -3,10 +3,9 @@
 .game-overlay-container {
   position: absolute;
   z-index: 500;
-  top: 200px;
+  top: 280px;
   width: 100%;
   max-width: 768px;
-  height: 400px;
 }
 
 .winner-message-container {
@@ -51,7 +50,7 @@
 
 @include tablet {
   .game-overlay-container {
-    top: -100px;
+    top: 60px;
   }
 
   .winner-message-container p:first-child {
