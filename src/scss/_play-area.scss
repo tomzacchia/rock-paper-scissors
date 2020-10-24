@@ -28,18 +28,6 @@ $choice-container-padding: 15px;
   max-width: $max-choices-container-width;
 }
 
-@include tablet {
-  .play-area-bg {
-    left: 50%;
-    margin-left: -($max-choices-container-width/2);
-  }
-
-  .choices-container {
-    left: 50%;
-    margin-left: -($max-choices-container-width/2);
-  }
-}
-
 .choice-container {
   padding: $choice-container-padding;
   width: max-content;

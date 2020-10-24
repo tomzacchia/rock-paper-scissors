@@ -1,0 +1,43 @@
+@import "./mixins";
+
+.game-overlay-container {
+  position: absolute;
+  top: 200px;
+  width: 100%;
+  max-width: 768px;
+}
+
+.winner-message-container {
+  color: white;
+  text-align: center;
+}
+
+.winner-message-container p {
+  display: inline;
+}
+
+.winner-message-container p:first-child {
+  margin-right: 7rem;
+}
+
+.button-container {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container h1 {
+  font-size: 4rem;
+  color: white;
+}
+
+.button-container button {
+  margin-top: 1rem;
+  padding: 1rem 3rem;
+  border-radius: 6px;
+  background-color: white;
+  color: #161d40;
+  font-weight: 600;
+}
