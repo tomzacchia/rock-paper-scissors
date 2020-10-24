@@ -8,6 +8,9 @@ $highlight-origin-top: 90px;
 $highlight-origin-left: 105px;
 $highlight-origin-right: 105px;
 
+$highlight-origin-left-tablet: 200px;
+$highlight-origin-right-tablet: 200px;
+
 .game-board {
   position: relative;
   margin-top: 6rem;
@@ -83,4 +86,30 @@ $highlight-origin-right: 105px;
 
 .highlight-lg-right {
   margin-left: ($highlight-origin-right - $highlight-radius-lg);
+}
+
+@include tablet {
+  .highlight-sm-left {
+    margin-left: -($highlight-origin-left-tablet + $highlight-radius-sm);
+  }
+
+  .highlight-md-left {
+    margin-left: -($highlight-origin-left-tablet + $highlight-radius-md);
+  }
+
+  .highlight-lg-left {
+    margin-left: -($highlight-origin-left-tablet + $highlight-radius-lg);
+  }
+
+  .highlight-sm-right {
+    margin-left: ($highlight-origin-right-tablet - $highlight-radius-sm);
+  }
+
+  .highlight-md-right {
+    margin-left: ($highlight-origin-right-tablet - $highlight-radius-md);
+  }
+
+  .highlight-lg-right {
+    margin-left: ($highlight-origin-right-tablet - $highlight-radius-lg);
+  }
 }
