@@ -90,5 +90,11 @@ $choice-container-padding: 15px;
 
 .animate-player-choice {
   top: 25px;
-  margin-left: -265px;
+  margin-left: -170px;
+}
+
+@include tablet {
+  .animate-player-choice {
+    margin-left: -265px;
+  }
 }
