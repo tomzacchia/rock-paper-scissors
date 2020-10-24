@@ -2,8 +2,8 @@
 @import "./mixins";
 
 $max-choices-container-width: 768px;
-$choice-white-bg-diameter: 120px;
-$choice-container-padding: 25px;
+$choice-white-bg-diameter: 100px;
+$choice-container-padding: 15px;
 
 .play-area-container {
   position: relative;
@@ -55,14 +55,14 @@ $choice-container-padding: 25px;
 .paper {
   top: 25px;
   left: 50%;
-  margin-left: -185px;
+  margin-left: -170px;
   background-color: blue;
 }
 
 .scissors {
   top: 25px;
   left: 50%;
-  margin-left: 15px;
+  margin-left: 40px;
   background-color: orange;
 }
 
