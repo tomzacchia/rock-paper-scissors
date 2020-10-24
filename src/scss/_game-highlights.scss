@@ -10,7 +10,13 @@ $highlight-origin-right: 105px;
 
 .game-board {
   position: relative;
-  overflow: hidden;
+  margin-top: 6rem;
+}
+
+@include tablet {
+  .game-board {
+    margin-top: 10rem;
+  }
 }
 
 .background-effects-container {
@@ -21,10 +27,8 @@ $highlight-origin-right: 105px;
 .highlight-container {
   position: relative;
   margin: 0 auto;
-  margin-top: 6rem;
   width: 100%;
   max-width: 768px;
-  border: solid thin red;
 }
 
 .highlight {
