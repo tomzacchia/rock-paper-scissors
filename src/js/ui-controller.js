@@ -6,6 +6,7 @@ const uiController = (function () {
   const DOM_STRINGS = {
     backgroundEffectContainer: ".background-effects-container",
     playAreaContainer: ".play-area-container",
+    score: ".score",
   };
 
   const highlightHTML = `
@@ -71,9 +72,14 @@ const uiController = (function () {
         .insertAdjacentHTML("beforeend", playerChoicesHTML);
     },
 
+    updateScore: function (score) {
+      document.querySelector(DOM_STRINGS.score).innerHTML = score;
+    },
+
     init: function () {
       this.renderPlayAreaBackgroundHTML();
       this.renderPlayerChoiceHTML();
+      this.updateScore(0);
     },
   };
 })();
