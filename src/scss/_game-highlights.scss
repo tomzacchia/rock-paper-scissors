@@ -1,0 +1,104 @@
+@import "./variables";
+@import "./mixins";
+
+$highlight-radius-sm: 80px;
+$highlight-radius-md: 110px;
+$highlight-radius-lg: 140px;
+$highlight-origin-top: 90px;
+$highlight-origin-left: 105px;
+$highlight-origin-right: 105px;
+
+$highlight-origin-left-tablet: 200px;
+$highlight-origin-right-tablet: 200px;
+
+.background-effects-container {
+  position: absolute;
+  width: 100%;
+}
+
+.highlight-container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 768px;
+}
+
+.highlight {
+  position: absolute;
+  border-radius: 50%;
+  left: 50%;
+}
+
+.highlight-sm {
+  top: -($highlight-radius-sm - $highlight-origin-top);
+  width: $highlight-radius-sm * 2;
+  height: $highlight-radius-sm * 2;
+  z-index: 10;
+  background-color: #ffffff12;
+}
+
+.highlight-md {
+  top: -($highlight-radius-md - $highlight-origin-top);
+  width: $highlight-radius-md * 2;
+  height: $highlight-radius-md * 2;
+  z-index: 5;
+  background-color: #ffffff14;
+}
+
+.highlight-lg {
+  top: -($highlight-radius-lg - $highlight-origin-top);
+  width: $highlight-radius-lg * 2;
+  height: $highlight-radius-lg * 2;
+  z-index: 0;
+  background-color: #ffffff0f;
+}
+
+.highlight-sm-left {
+  margin-left: -($highlight-origin-left + $highlight-radius-sm);
+}
+
+.highlight-md-left {
+  margin-left: -($highlight-origin-left + $highlight-radius-md);
+}
+
+.highlight-lg-left {
+  margin-left: -($highlight-origin-left + $highlight-radius-lg);
+}
+
+.highlight-sm-right {
+  margin-left: ($highlight-origin-right - $highlight-radius-sm);
+}
+
+.highlight-md-right {
+  margin-left: ($highlight-origin-right - $highlight-radius-md);
+}
+
+.highlight-lg-right {
+  margin-left: ($highlight-origin-right - $highlight-radius-lg);
+}
+
+@include tablet {
+  .highlight-sm-left {
+    margin-left: -($highlight-origin-left-tablet + $highlight-radius-sm);
+  }
+
+  .highlight-md-left {
+    margin-left: -($highlight-origin-left-tablet + $highlight-radius-md);
+  }
+
+  .highlight-lg-left {
+    margin-left: -($highlight-origin-left-tablet + $highlight-radius-lg);
+  }
+
+  .highlight-sm-right {
+    margin-left: ($highlight-origin-right-tablet - $highlight-radius-sm);
+  }
+
+  .highlight-md-right {
+    margin-left: ($highlight-origin-right-tablet - $highlight-radius-md);
+  }
+
+  .highlight-lg-right {
+    margin-left: ($highlight-origin-right-tablet - $highlight-radius-lg);
+  }
+}

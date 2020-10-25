@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,600;1,600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <section class="header">
@@ -14,11 +18,68 @@
       </h1>
       <div class="score-container">
         <p>SCORE</p>
-        <h1>12</h1>
+        <h1>0</h1>
       </div>
     </section>
 
-    <div></div>
+    <div class="game-board">
+      <!-- <div class="background-effects-container">
+        <div class="highlight-container highlight-container-left">
+          <div class="highlight highlight-sm highlight-sm-left"></div>
+          <div class="highlight highlight-md highlight-md-left"></div>
+          <div class="highlight highlight-lg highlight-lg-left"></div>
+        </div>
+
+        <div class="highlight-container highlight-container-right">
+          <div class="highlight highlight-sm highlight-sm-right"></div>
+          <div class="highlight highlight-md highlight-md-right"></div>
+          <div class="highlight highlight-lg highlight-lg-right"></div>
+        </div> -->
+      </div>
+
+      <div class="play-area-container">
+        <div class="play-area-bg absolute-horizontal-center"></div>
+
+        <div class="choices-container absolute-horizontal-center">
+          <div class="choice-container paper" data-user-selection="paper">
+            <div class="choice-white-bg">
+              <img src="./resources/icon-paper.svg" alt="paper" />
+            </div>
+          </div>
+          <div class="choice-container scissors" data-user-selection="scissors">
+            <div class="choice-white-bg">
+              <img src="./resources/icon-scissors.svg" alt="scissors" />
+            </div>
+          </div>
+          <div class="choice-container rock" data-user-selection="rock">
+            <div class="choice-white-bg">
+              <img src="./resources/icon-rock.svg" alt="rock" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="game-overlay-container absolute-horizontal-center">
+        <div class="winner-message-container">
+          <p>YOU PICKED</p>
+          <p class="message-right">THE HOUSE PICKED</p>
+        </div>
+
+        <div class="button-container">
+          <h1>YOU LOSE</h1>
+          <button>PLAY AGAIN</button>
+        </div>
+      </div> -->
+    </div>
+
+    <div class="rules-container">
+
+    </div>
+
+
+    <button class="rules-button">
+      RULES
+    </button>
 
     <!-- Attribution -->
     <div class="attribution">

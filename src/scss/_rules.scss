@@ -1,0 +1,22 @@
+@import "./mixins";
+
+.rules-button {
+  position: fixed;
+  left: 50%;
+  bottom: 6rem;
+  padding: 1rem 3rem;
+  margin-left: -75px;
+  border: solid thin white;
+  border-radius: 6px;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+}
+
+@include tablet {
+  .rules-button {
+    left: unset;
+    right: 2rem;
+    bottom: 3rem;
+  }
+}
