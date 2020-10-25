@@ -41,6 +41,20 @@ const uiController = (function () {
     </div>
   `;
 
+  const gameOverlayHTML = `
+    <div class="game-overlay-container absolute-horizontal-center">
+      <div class="winner-message-container">
+        <p>YOU PICKED</p>
+        <p class="message-right">THE HOUSE PICKED</p>
+      </div>
+
+      <div class="button-container">
+        <h1>%message%</h1>
+        <button>PLAY AGAIN</button>
+      </div>
+    </div>
+  `;
+
   const formatHighlightHTML = function (isPlayerWinner) {
     let newHtml;
 
@@ -73,13 +87,24 @@ const uiController = (function () {
     },
 
     updateScore: function (score) {
-      document.querySelector(DOM_STRINGS.score).innerHTML = score;
+      const scoreElement = document.querySelector(DOM_STRINGS.score);
+
+      score ? (scoreElement.innerHTML = score) : (scoreElement.innerHTML = 0);
+    },
+
+    renderGameOveralyHTML: function (isWinner) {
+      let message = isWinner ? "YOU WIN" : "YOU LOSE";
+      let newHTML = gameOverlayHTML.replace("%message%", message);
+
+      document
+        .querySelector(DOM_STRINGS.playAreaContainer)
+        .insertAdjacentHTML("beforeend", newHTML);
     },
 
     init: function () {
       this.renderPlayAreaBackgroundHTML();
       this.renderPlayerChoiceHTML();
-      this.updateScore(0);
+      this.updateScore();
     },
   };
 })();
