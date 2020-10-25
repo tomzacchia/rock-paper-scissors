@@ -3,7 +3,7 @@ import gameController from "./game-controller";
 import uiController from "./ui-controller";
 
 const appController = (function (gameController, uiController) {
-  console.log("inside appController");
-  gameController.init();
-  uiController.renderHighlightElement();
+  // console.log("inside appController");
+  // gameController.init();
+  uiController.init();
 })(gameController, uiController);
