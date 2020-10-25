@@ -1,3 +1,9 @@
 import "../scss/styles.scss";
+import gameController from "./game-controller";
+import uiController from "./ui-controller";
 
-console.log("Hello World");
+const appController = (function (gameController, uiController) {
+  console.log("inside appController");
+  gameController.init();
+  uiController.init();
+})(gameController, uiController);
