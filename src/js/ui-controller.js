@@ -25,17 +25,17 @@ const uiController = (function () {
 
   const playerChoicesHTML = `
     <div class="choices-container absolute-horizontal-center">
-      <div class="choice-container paper" data-user-choice="paper">
+      <div class="choice-container paper" data-user-selection="paper">
         <div class="choice-white-bg">
           <img src="${paperSvg}" alt="paper" />
         </div>
       </div>
-      <div class="choice-container scissors" data-user-choice="scissors">
+      <div class="choice-container scissors" data-user-selection="scissors">
         <div class="choice-white-bg">
           <img src="${scissorsSvg}" alt="scissors" />
         </div>
       </div>
-      <div class="choice-container rock" data-user-choice="rock">
+      <div class="choice-container rock" data-user-selection="rock">
         <div class="choice-white-bg">
           <img src="${rockSvg}" alt="rock" />
         </div>
@@ -103,13 +103,13 @@ const uiController = (function () {
         .insertAdjacentHTML("beforeend", newHTML);
     },
 
-    triggerGameBoardAnimation: function (playerChoice, botChoice) {
+    triggerGameBoardAnimation: function (playerSelection, botSelection) {
       let choicesHTMLArr = document.querySelectorAll(".choice-container");
 
       choicesHTMLArr.forEach((choiceHTML) => {
-        if (choiceHTML.dataset.userChoice === playerChoice) {
+        if (choiceHTML.dataset.userSelection === playerSelection) {
           choiceHTML.classList.add("animate-player-choice");
-        } else if (choiceHTML.dataset.userChoice === botChoice) {
+        } else if (choiceHTML.dataset.userSelection === botSelection) {
           choiceHTML.classList.add("animate-bot-choice");
         } else {
           choiceHTML.parentNode.removeChild(choiceHTML);
