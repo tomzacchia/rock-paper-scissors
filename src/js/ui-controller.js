@@ -118,8 +118,6 @@ const uiController = (function () {
     init: function () {
       this.renderPlayAreaBackgroundHTML();
       this.renderPlayerChoiceHTML();
-
-      setTimeout(() => this.triggerGameBoardAnimation("rock", "paper"), 2000);
     },
   };
 })();
