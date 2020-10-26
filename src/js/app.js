@@ -19,7 +19,10 @@ const appController = (function (gameController, uiController) {
 
     uiController.removePlayAreaBackgroundHTML();
     uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
-    console.log(botChoice, gameOutcome);
+
+    setTimeout(() => {
+      uiController.renderHighlightHTML(gameOutcome);
+    }, 2000);
   };
 
   const setupEventLiseners = function () {
@@ -36,7 +39,6 @@ const appController = (function (gameController, uiController) {
 
       const userChoice = choiceContainer.dataset.userChoice;
       const isGameActive = gameController.getIsGameActive();
-      console.log(isGameActive);
 
       if (!isGameActive) return;
 

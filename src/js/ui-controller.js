@@ -94,16 +94,6 @@ const uiController = (function () {
   return {
     domStrings: DOM_STRINGS,
 
-    renderHighlightHTML: function (isPlayerWinner, gameOutcome) {
-      if (gameOutcome === GAME_OUTCOMES.tie) return;
-
-      const highlightHTML = formatHighlightHTML(isPlayerWinner);
-
-      document
-        .querySelector(DOM_STRINGS.backgroundEffectContainer)
-        .insertAdjacentHTML("afterbegin", highlightHTML);
-    },
-
     renderPlayAreaBackgroundHTML: function () {
       document
         .querySelector(DOM_STRINGS.playAreaContainer)
@@ -118,25 +108,10 @@ const uiController = (function () {
       playAreaBackgroundNode.parentNode.removeChild(playAreaBackgroundNode);
     },
 
-    renderPlayerChoiceHTML: function () {
+    renderPlayerChoicesHTML: function () {
       document
         .querySelector(DOM_STRINGS.playAreaContainer)
         .insertAdjacentHTML("beforeend", playerChoicesHTML);
-    },
-
-    updateScore: function (score) {
-      const scoreHTML = document.querySelector(DOM_STRINGS.score);
-
-      scoreHTML.innerHTML = score;
-    },
-
-    renderGameOveralyHTML: function (isWinner) {
-      let message = isWinner ? "YOU WIN" : "YOU LOSE";
-      let newHTML = gameOverlayHTML.replace("%message%", message);
-
-      document
-        .querySelector(DOM_STRINGS.gameOverlayContainer)
-        .insertAdjacentHTML("beforeend", newHTML);
     },
 
     triggerGameBoardAnimation: function (userChoice, botChoice, gameOutcome) {
@@ -155,6 +130,33 @@ const uiController = (function () {
       if (gameOutcome === GAME_OUTCOMES.tie) gameTieAnimation(userChoice);
     },
 
+    renderHighlightHTML: function (gameOutcome) {
+      let isPlayerWinner = gameOutcome === GAME_OUTCOMES.win;
+
+      if (gameOutcome === GAME_OUTCOMES.tie) return;
+
+      const highlightHTML = formatHighlightHTML(isPlayerWinner);
+
+      document
+        .querySelector(DOM_STRINGS.backgroundEffectContainer)
+        .insertAdjacentHTML("afterbegin", highlightHTML);
+    },
+
+    updateScore: function (score) {
+      const scoreHTML = document.querySelector(DOM_STRINGS.score);
+
+      scoreHTML.innerHTML = score;
+    },
+
+    renderGameOveralyHTML: function (isWinner) {
+      let message = isWinner ? "YOU WIN" : "YOU LOSE";
+      let newHTML = gameOverlayHTML.replace("%message%", message);
+
+      document
+        .querySelector(DOM_STRINGS.gameOverlayContainer)
+        .insertAdjacentHTML("beforeend", newHTML);
+    },
+
     emptyGameBoardContainer: function () {
       const containersToBeEmptied = [
         document.querySelector(DOM_STRINGS.backgroundEffectContainer),
@@ -167,7 +169,7 @@ const uiController = (function () {
 
     init: function () {
       this.renderPlayAreaBackgroundHTML();
-      this.renderPlayerChoiceHTML();
+      this.renderPlayerChoicesHTML();
     },
   };
 })();

@@ -19,7 +19,6 @@ const gameController = (function () {
 
   const generateBotChoice = function () {
     const randomInt = Math.round(Math.random() * (choices.length - 1));
-    console.log(randomInt);
     const botChoice = choices[randomInt];
 
     return botChoice;
