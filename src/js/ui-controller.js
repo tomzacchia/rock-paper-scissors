@@ -104,7 +104,6 @@ const uiController = (function () {
     init: function () {
       this.renderPlayAreaBackgroundHTML();
       this.renderPlayerChoiceHTML();
-      this.updateScore();
     },
   };
 })();
