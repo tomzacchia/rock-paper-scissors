@@ -3,6 +3,10 @@ import gameController from "./game-controller";
 import uiController from "./ui-controller";
 
 const appController = (function (gameController, uiController) {
+  const userChoiceHandler = function (userChoice) {
+    const botChoice = gameController.generateBotChoice();
+  };
+
   const setupEventLiseners = function () {
     const playAreaContainer = document.querySelector(
       uiController.domStrings.playAreaContainer
@@ -15,8 +19,12 @@ const appController = (function (gameController, uiController) {
 
       if (!choiceContainer) return;
 
-      const userSelection = choiceContainer.dataset.userSelection;
-      console.log(userSelection);
+      const userChoice = choiceContainer.dataset.userChoice;
+      const isGameActive = gameController.getIsGameActive;
+
+      if (!isGameActive) return;
+
+      userChoiceHandler(userChoice);
     });
 
     // play again button listener
