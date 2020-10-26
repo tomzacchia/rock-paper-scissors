@@ -3,6 +3,10 @@
 $modal-width-tablet: 350px;
 $modal-height-tablet: 400px;
 
+.display-none {
+  display: none;
+}
+
 .modal-container {
   position: fixed;
   top: 0;
