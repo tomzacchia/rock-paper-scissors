@@ -15,6 +15,8 @@ const appController = (function (gameController, uiController) {
       score = gameController.updateScore(GAME_OUTCOMES.win);
     } else if (gameOutcome === GAME_OUTCOMES.lose) {
       score = gameController.updateScore(GAME_OUTCOMES.lose);
+    } else {
+      score = gameController.getScore();
     }
 
     uiController.removePlayAreaBackgroundHTML();
@@ -24,7 +26,16 @@ const appController = (function (gameController, uiController) {
       uiController.renderHighlightHTML(gameOutcome);
       uiController.updateScore(score);
       uiController.renderGameOveralyHTML(gameOutcome);
-    }, 2000);
+    }, 1000);
+  };
+
+  const resetBoardHandler = function () {
+    uiController.emptyGameBoardContainer();
+    gameController.toggleIsGameActive();
+
+    setTimeout(() => {
+      uiController.init();
+    }, 1000);
   };
 
   const setupEventLiseners = function () {
@@ -54,7 +65,7 @@ const appController = (function (gameController, uiController) {
 
       if (!buttonContainer) return;
 
-      console.log(buttonContainer);
+      resetBoardHandler();
     });
 
     // rules event listener

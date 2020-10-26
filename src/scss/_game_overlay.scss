@@ -48,6 +48,14 @@
   color: red;
 }
 
+.button-container button:active {
+  outline: none;
+}
+
+.button-container button:focus {
+  outline: none;
+}
+
 @include tablet {
   .game-overlay-container {
     top: 60px;

@@ -55,6 +55,9 @@ const gameController = (function () {
     getIsGameActive: function () {
       return state.isGameActive;
     },
+    getScore: function () {
+      return state.playerScore;
+    },
   };
 })();
 
