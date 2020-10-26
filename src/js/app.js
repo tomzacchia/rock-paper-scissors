@@ -32,13 +32,22 @@ const appController = (function (gameController, uiController) {
     }, 1000);
   };
 
+  const toggleModalDisplay = function () {
+    let rulesModal = document.querySelector(".modal-container");
+    rulesModal.classList.toggle("display-none");
+  };
+
   const setupEventLiseners = function () {
-    const playAreaContainer = document.querySelector(
+    let rulesButton, playAreaContainer, rulesModal, closeModal;
+
+    playAreaContainer = document.querySelector(
       uiController.domStrings.playAreaContainer
     );
+    rulesButton = document.querySelector(".rules-button");
+    closeModal = document.querySelector(".modal-close");
 
+    // user clicks on rock, paper or scissors
     playAreaContainer.addEventListener("click", function (event) {
-      // user selection event listener
       const target = event.target;
       const choiceContainer = target.closest(".choice-container");
 
@@ -52,7 +61,7 @@ const appController = (function (gameController, uiController) {
       userChoiceHandler(userChoice);
     });
 
-    // play again button listener
+    // play again button
     document.addEventListener("click", function (event) {
       const target = event.target;
       const buttonContainer = target.closest(".play-again-button");
@@ -62,7 +71,14 @@ const appController = (function (gameController, uiController) {
       resetBoardHandler();
     });
 
-    // rules event listener
+    // show rules
+    rulesButton.addEventListener("click", function () {
+      toggleModalDisplay();
+    });
+
+    closeModal.addEventListener("click", function () {
+      toggleModalDisplay();
+    });
   };
 
   return {
