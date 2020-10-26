@@ -66,6 +66,8 @@ const uiController = (function () {
   };
 
   return {
+    domStrings: DOM_STRINGS,
+
     renderHighlightHTML: function (isPlayerWinner) {
       const highlightHTML = formatHighlightHTML(isPlayerWinner);
 
