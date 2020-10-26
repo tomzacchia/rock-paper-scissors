@@ -12,7 +12,9 @@ const appController = (function (gameController, uiController) {
       // user selection event listener
       const target = event.target;
       const targetContainer = target.closest(".choice-container");
-      const userSelection = targetContainer.dataset.userSelection;
+      const userSelection = targetContainer
+        ? targetContainer.dataset.userSelection
+        : null;
 
       // play again button listener
 
