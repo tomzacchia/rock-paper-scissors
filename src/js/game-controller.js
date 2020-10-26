@@ -53,20 +53,22 @@ const gameController = (function () {
     return state.playerScore;
   };
 
+  const resetGameOutcome = function () {
+    state.gameOutcome = null;
+  };
+
   return {
     init: function () {
       console.log("gameController");
+    },
+    getIsGameActive: function () {
+      return state.isGameActive;
     },
     toggleIsGameActive,
     generateBotChoice,
     determineOutcome,
     updateScore,
-    getIsGameActive: function () {
-      return state.isGameActive;
-    },
-    getScore: function () {
-      return state.playerScore;
-    },
+    resetGameOutcome,
   };
 })();
 

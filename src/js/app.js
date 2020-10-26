@@ -25,6 +25,7 @@ const appController = (function (gameController, uiController) {
   const resetBoardHandler = function () {
     uiController.emptyGameBoardContainer();
     gameController.toggleIsGameActive();
+    gameController.resetGameOutcome();
 
     setTimeout(() => {
       uiController.init();
