@@ -59,8 +59,8 @@ const uiController = (function () {
     let newHtml;
 
     isPlayerWinner
-      ? (newHtml = highlightElement.replaceAll("%winner%", "left"))
-      : (newHtml = highlightElement.replaceAll("%winner%", "right"));
+      ? (newHtml = highlightHTML.replaceAll("%winner%", "left"))
+      : (newHtml = highlightHTML.replaceAll("%winner%", "right"));
 
     return newHtml;
   };
@@ -87,9 +87,9 @@ const uiController = (function () {
     },
 
     updateScore: function (score) {
-      const scoreElement = document.querySelector(DOM_STRINGS.score);
+      const scoreHTML = document.querySelector(DOM_STRINGS.score);
 
-      score ? (scoreElement.innerHTML = score) : (scoreElement.innerHTML = 0);
+      scoreHTML.innerHTML = score;
     },
 
     renderGameOveralyHTML: function (isWinner) {
@@ -101,9 +101,25 @@ const uiController = (function () {
         .insertAdjacentHTML("beforeend", newHTML);
     },
 
+    triggerGameBoardAnimation: function (playerSelection, botSelection) {
+      let choicesHTMLArr = document.querySelectorAll(".choice-container");
+      // animate-player-choice
+
+      choicesHTMLArr.forEach((choiceHTML) => {
+        if (choiceHTML.dataset.userSelection === "paper") {
+          setTimeout(
+            () => choiceHTML.classList.add("animate-player-choice"),
+            2000
+          );
+        }
+      });
+    },
+
     init: function () {
       this.renderPlayAreaBackgroundHTML();
       this.renderPlayerChoiceHTML();
+      this.triggerGameBoardAnimation();
+      this.renderHighlightHTML(true);
     },
   };
 })();
