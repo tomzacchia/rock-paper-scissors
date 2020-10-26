@@ -103,14 +103,14 @@ const uiController = (function () {
 
     triggerGameBoardAnimation: function (playerSelection, botSelection) {
       let choicesHTMLArr = document.querySelectorAll(".choice-container");
-      // animate-player-choice
 
       choicesHTMLArr.forEach((choiceHTML) => {
-        if (choiceHTML.dataset.userSelection === "paper") {
-          setTimeout(
-            () => choiceHTML.classList.add("animate-player-choice"),
-            2000
-          );
+        if (choiceHTML.dataset.userSelection === playerSelection) {
+          choiceHTML.classList.add("animate-player-choice");
+        } else if (choiceHTML.dataset.userSelection === botSelection) {
+          choiceHTML.classList.add("animate-bot-choice");
+        } else {
+          choiceHTML.parentNode.removeChild(choiceHTML);
         }
       });
     },
@@ -118,8 +118,8 @@ const uiController = (function () {
     init: function () {
       this.renderPlayAreaBackgroundHTML();
       this.renderPlayerChoiceHTML();
-      this.triggerGameBoardAnimation();
-      this.renderHighlightHTML(true);
+
+      setTimeout(() => this.triggerGameBoardAnimation("rock", "paper"), 2000);
     },
   };
 })();
