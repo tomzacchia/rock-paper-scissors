@@ -6,4 +6,6 @@ const appController = (function (gameController, uiController) {
   // console.log("inside appController");
   // gameController.init();
   uiController.init();
+  setTimeout(() => uiController.emptyGameBoardContainer(), 1000);
+  setTimeout(() => uiController.init(), 2000);
 })(gameController, uiController);

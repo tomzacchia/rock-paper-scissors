@@ -6,7 +6,9 @@ const uiController = (function () {
   const DOM_STRINGS = {
     backgroundEffectContainer: ".background-effects-container",
     playAreaContainer: ".play-area-container",
+    gameOverlayContainer: ".game-overlay-container",
     score: ".score",
+    gameBoard: ".game-board",
   };
 
   const highlightHTML = `
@@ -42,16 +44,14 @@ const uiController = (function () {
   `;
 
   const gameOverlayHTML = `
-    <div class="game-overlay-container absolute-horizontal-center">
-      <div class="winner-message-container">
-        <p>YOU PICKED</p>
-        <p class="message-right">THE HOUSE PICKED</p>
-      </div>
+    <div class="winner-message-container">
+      <p>YOU PICKED</p>
+      <p class="message-right">THE HOUSE PICKED</p>
+    </div>
 
-      <div class="button-container">
-        <h1>%message%</h1>
-        <button>PLAY AGAIN</button>
-      </div>
+    <div class="button-container">
+      <h1>%message%</h1>
+      <button>PLAY AGAIN</button>
     </div>
   `;
 
@@ -97,7 +97,7 @@ const uiController = (function () {
       let newHTML = gameOverlayHTML.replace("%message%", message);
 
       document
-        .querySelector(DOM_STRINGS.playAreaContainer)
+        .querySelector(DOM_STRINGS.gameOverlayContainer)
         .insertAdjacentHTML("beforeend", newHTML);
     },
 
@@ -113,6 +113,16 @@ const uiController = (function () {
           choiceHTML.parentNode.removeChild(choiceHTML);
         }
       });
+    },
+
+    emptyGameBoardContainer: function () {
+      const containersToBeEmptied = [
+        document.querySelector(DOM_STRINGS.backgroundEffectContainer),
+        document.querySelector(DOM_STRINGS.playAreaContainer),
+        document.querySelector(DOM_STRINGS.gameOverlayContainer),
+      ];
+
+      containersToBeEmptied.forEach((container) => (container.innerHTML = ""));
     },
 
     init: function () {
