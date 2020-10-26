@@ -1,8 +1,37 @@
 import "../scss/styles.scss";
 import gameController from "./game-controller";
 import uiController from "./ui-controller";
+import GAME_OUTCOMES from "./constants";
 
 const appController = (function (gameController, uiController) {
+  const userChoiceHandler = function (userChoice) {
+    let score, botChoice, gameOutcome;
+
+    gameController.toggleIsGameActive();
+    botChoice = gameController.generateBotChoice();
+    gameOutcome = gameController.determineOutcome(userChoice, botChoice);
+    score = gameController.updateScore();
+
+    uiController.removePlayAreaBackgroundHTML();
+    uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
+
+    setTimeout(() => {
+      uiController.renderHighlightHTML(gameOutcome);
+      uiController.updateScore(score);
+      uiController.renderGameOveralyHTML(gameOutcome);
+    }, 1000);
+  };
+
+  const resetBoardHandler = function () {
+    uiController.emptyGameBoardContainer();
+    gameController.toggleIsGameActive();
+    gameController.resetGameOutcome();
+
+    setTimeout(() => {
+      uiController.init();
+    }, 1000);
+  };
+
   const setupEventLiseners = function () {
     const playAreaContainer = document.querySelector(
       uiController.domStrings.playAreaContainer
@@ -15,8 +44,12 @@ const appController = (function (gameController, uiController) {
 
       if (!choiceContainer) return;
 
-      const userSelection = choiceContainer.dataset.userSelection;
-      console.log(userSelection);
+      const userChoice = choiceContainer.dataset.userChoice;
+      const isGameActive = gameController.getIsGameActive();
+
+      if (!isGameActive) return;
+
+      userChoiceHandler(userChoice);
     });
 
     // play again button listener
@@ -26,7 +59,7 @@ const appController = (function (gameController, uiController) {
 
       if (!buttonContainer) return;
 
-      console.log(buttonContainer);
+      resetBoardHandler();
     });
 
     // rules event listener

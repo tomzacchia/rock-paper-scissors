@@ -48,9 +48,17 @@
   color: red;
 }
 
+.button-container button:active {
+  outline: none;
+}
+
+.button-container button:focus {
+  outline: none;
+}
+
 @include tablet {
   .game-overlay-container {
-    top: 60px;
+    top: 30px;
   }
 
   .winner-message-container p:first-child {
@@ -58,7 +66,7 @@
   }
 
   .button-container {
-    margin-top: 8rem;
+    margin-top: 5rem;
   }
 
   .button-container h1 {
