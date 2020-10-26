@@ -68,10 +68,35 @@ const uiController = (function () {
     return newHtml;
   };
 
+  const gameTieAnimation = function (userChoice) {
+    let svgUrl;
+    let choicesContainer = document.querySelector(DOM_STRINGS.choicesContainer);
+
+    if (userChoice === "rock") {
+      svgUrl = rockSvg;
+    } else if (userChoice === "paper") {
+      svgUrl = paperSvg;
+    } else {
+      svgUrl = scissorsSvg;
+    }
+
+    const newHTML = `
+      <div class="choice-container ${userChoice} animate-bot-choice">
+        <div class="choice-white-bg">
+          <img src="${svgUrl}" alt="${userChoice}" />
+        </div>
+      </div>
+    `;
+
+    choicesContainer.insertAdjacentHTML("beforeend", newHTML);
+  };
+
   return {
     domStrings: DOM_STRINGS,
 
-    renderHighlightHTML: function (isPlayerWinner) {
+    renderHighlightHTML: function (isPlayerWinner, gameOutcome) {
+      if (gameOutcome === GAME_OUTCOMES.tie) return;
+
       const highlightHTML = formatHighlightHTML(isPlayerWinner);
 
       document
@@ -114,32 +139,6 @@ const uiController = (function () {
         .insertAdjacentHTML("beforeend", newHTML);
     },
 
-    gameTieAnimation: function (userChoice) {
-      console.log("game tie");
-      let svgUrl;
-      let choicesContainer = document.querySelector(
-        DOM_STRINGS.choicesContainer
-      );
-
-      if (userChoice === "rock") {
-        svgUrl = rockSvg;
-      } else if (userChoice === "paper") {
-        svgUrl = paperSvg;
-      } else {
-        svgUrl = scissorsSvg;
-      }
-
-      const newHTML = `
-        <div class="choice-container ${userChoice} animate-bot-choice">
-          <div class="choice-white-bg">
-            <img src="${svgUrl}" alt="${userChoice}" />
-          </div>
-        </div>
-      `;
-
-      choicesContainer.insertAdjacentHTML("beforeend", newHTML);
-    },
-
     triggerGameBoardAnimation: function (userChoice, botChoice, gameOutcome) {
       let choicesHTMLArr = document.querySelectorAll(".choice-container");
 
@@ -153,7 +152,7 @@ const uiController = (function () {
         }
       });
 
-      if (gameOutcome === GAME_OUTCOMES.tie) this.gameTieAnimation(userChoice);
+      if (gameOutcome === GAME_OUTCOMES.tie) gameTieAnimation(userChoice);
     },
 
     emptyGameBoardContainer: function () {
