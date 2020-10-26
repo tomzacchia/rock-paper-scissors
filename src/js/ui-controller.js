@@ -51,7 +51,7 @@ const uiController = (function () {
 
     <div class="button-container">
       <h1>%message%</h1>
-      <button>PLAY AGAIN</button>
+      <button class="play-again-button">PLAY AGAIN</button>
     </div>
   `;
 

@@ -11,15 +11,25 @@ const appController = (function (gameController, uiController) {
     playAreaContainer.addEventListener("click", function (event) {
       // user selection event listener
       const target = event.target;
-      const targetContainer = target.closest(".choice-container");
-      const userSelection = targetContainer
-        ? targetContainer.dataset.userSelection
-        : null;
+      const choiceContainer = target.closest(".choice-container");
 
-      // play again button listener
+      if (!choiceContainer) return;
 
-      // rules event listener
+      const userSelection = choiceContainer.dataset.userSelection;
+      console.log(userSelection);
     });
+
+    // play again button listener
+    document.addEventListener("click", function (event) {
+      const target = event.target;
+      const buttonContainer = target.closest(".play-again-button");
+
+      if (!buttonContainer) return;
+
+      console.log(buttonContainer);
+    });
+
+    // rules event listener
   };
 
   return {
