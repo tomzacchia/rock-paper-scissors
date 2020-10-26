@@ -1,0 +1,80 @@
+@import "./mixins";
+
+$modal-width-tablet: 350px;
+$modal-height-tablet: 400px;
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  height: 100%;
+  width: 100%;
+  background-color: #0000004f;
+}
+
+.rules-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+.rules-container h1 {
+  text-align: center;
+  margin-top: 4rem;
+  color: #1a2849;
+}
+
+.rules-container .modal-close {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  margin-left: -12.5px;
+  width: 25px;
+  height: auto;
+}
+
+.rules-container .rules-img {
+  margin-top: 11rem;
+  width: 90%;
+  max-width: 350px;
+  height: auto;
+}
+
+@include tablet {
+  .rules-container {
+    top: 50%;
+    left: 50%;
+    padding: 2rem;
+    align-items: flex-start;
+    box-sizing: border-box;
+    margin-top: -($modal-width-tablet/2);
+    margin-left: -($modal-height-tablet/2);
+    width: $modal-width-tablet;
+    height: $modal-height-tablet;
+    border-radius: 12px;
+  }
+
+  .rules-container h1 {
+    margin-top: unset;
+  }
+
+  .rules-container .modal-close {
+    bottom: unset;
+    left: unset;
+    margin-left: unset;
+    right: 1rem;
+    top: 41px;
+  }
+
+  .rules-container .rules-img {
+    width: 100%;
+    margin-top: 2rem;
+  }
+}

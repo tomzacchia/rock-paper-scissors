@@ -37,8 +37,8 @@ const appController = (function (gameController, uiController) {
       uiController.domStrings.playAreaContainer
     );
 
+    // user clicks on rock, paper or scissors
     playAreaContainer.addEventListener("click", function (event) {
-      // user selection event listener
       const target = event.target;
       const choiceContainer = target.closest(".choice-container");
 
@@ -52,7 +52,7 @@ const appController = (function (gameController, uiController) {
       userChoiceHandler(userChoice);
     });
 
-    // play again button listener
+    // play again button
     document.addEventListener("click", function (event) {
       const target = event.target;
       const buttonContainer = target.closest(".play-again-button");
@@ -62,7 +62,7 @@ const appController = (function (gameController, uiController) {
       resetBoardHandler();
     });
 
-    // rules event listener
+    // show rules
   };
 
   return {
