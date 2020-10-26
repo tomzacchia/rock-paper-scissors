@@ -22,6 +22,8 @@ const appController = (function (gameController, uiController) {
 
     setTimeout(() => {
       uiController.renderHighlightHTML(gameOutcome);
+      uiController.updateScore(score);
+      uiController.renderGameOveralyHTML(gameOutcome);
     }, 2000);
   };
 

@@ -148,9 +148,18 @@ const uiController = (function () {
       scoreHTML.innerHTML = score;
     },
 
-    renderGameOveralyHTML: function (isWinner) {
-      let message = isWinner ? "YOU WIN" : "YOU LOSE";
-      let newHTML = gameOverlayHTML.replace("%message%", message);
+    renderGameOveralyHTML: function (gameOutcome) {
+      let message, newHTML;
+
+      if (gameOutcome === GAME_OUTCOMES.win) {
+        message = "YOU WIN";
+      } else if (gameOutcome === GAME_OUTCOMES.lose) {
+        message = "YOU LOSE";
+      } else {
+        message = "TIE";
+      }
+
+      newHTML = gameOverlayHTML.replace("%message%", message);
 
       document
         .querySelector(DOM_STRINGS.gameOverlayContainer)
