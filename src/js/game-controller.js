@@ -4,6 +4,7 @@ const gameController = (function () {
   let state = {
     isGameActive: true,
     playerScore: 0,
+    gameOutcome: "",
   };
 
   const choices = ["rock", "paper", "scissors"];
@@ -25,19 +26,27 @@ const gameController = (function () {
   };
 
   const determineOutcome = function (userChoice, botChoice) {
+    let gameOutcome;
+
     if (userChoice === botChoice) {
-      return GAME_OUTCOMES.tie;
+      gameOutcome = GAME_OUTCOMES.tie;
     } else if (winningPairings[userChoice] === botChoice) {
-      return GAME_OUTCOMES.win;
+      gameOutcome = GAME_OUTCOMES.win;
     } else {
-      return GAME_OUTCOMES.lose;
+      gameOutcome = GAME_OUTCOMES.lose;
     }
+
+    state.gameOutcome = gameOutcome;
+
+    return gameOutcome;
   };
 
-  const updateScore = function (outcomeType) {
-    if (outcomeType === GAME_OUTCOMES.win) {
+  const updateScore = function () {
+    const gameOutcome = state.gameOutcome;
+
+    if (gameOutcome === GAME_OUTCOMES.win) {
       state.playerScore += 1;
-    } else if (outcomeType === GAME_OUTCOMES.lose) {
+    } else if (gameOutcome === GAME_OUTCOMES.lose) {
       state.playerScore -= 1;
     }
 

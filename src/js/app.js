@@ -10,14 +10,7 @@ const appController = (function (gameController, uiController) {
     gameController.toggleIsGameActive();
     botChoice = gameController.generateBotChoice();
     gameOutcome = gameController.determineOutcome(userChoice, botChoice);
-
-    if (gameOutcome === GAME_OUTCOMES.win) {
-      score = gameController.updateScore(GAME_OUTCOMES.win);
-    } else if (gameOutcome === GAME_OUTCOMES.lose) {
-      score = gameController.updateScore(GAME_OUTCOMES.lose);
-    } else {
-      score = gameController.getScore();
-    }
+    score = gameController.updateScore();
 
     uiController.removePlayAreaBackgroundHTML();
     uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
