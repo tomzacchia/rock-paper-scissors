@@ -5,21 +5,21 @@ import GAME_OUTCOMES from "./constants";
 
 const appController = (function (gameController, uiController) {
   const userChoiceHandler = function (userChoice) {
-    let score;
+    let score, botChoice, gameOutcome;
+
     gameController.toggleIsGameActive();
-
-    const botChoice = gameController.generateBotChoice();
-    const gameOutcome = gameController.determineOutcome(userChoice, botChoice);
-
-    // if (gameOutcome === GAME_OUTCOMES.tie) {
-
-    // }
+    botChoice = gameController.generateBotChoice();
+    gameOutcome = gameController.determineOutcome(userChoice, botChoice);
 
     if (gameOutcome === GAME_OUTCOMES.win) {
       score = gameController.updateScore(GAME_OUTCOMES.win);
     } else if (gameOutcome === GAME_OUTCOMES.lose) {
       score = gameController.updateScore(GAME_OUTCOMES.lose);
     }
+
+    uiController.removePlayAreaBackgroundHTML();
+    uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
+    console.log(botChoice, gameOutcome);
   };
 
   const setupEventLiseners = function () {
@@ -35,7 +35,8 @@ const appController = (function (gameController, uiController) {
       if (!choiceContainer) return;
 
       const userChoice = choiceContainer.dataset.userChoice;
-      const isGameActive = gameController.getIsGameActive;
+      const isGameActive = gameController.getIsGameActive();
+      console.log(isGameActive);
 
       if (!isGameActive) return;
 

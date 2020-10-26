@@ -1,6 +1,7 @@
 import paperSvg from "../resources/icon-paper.svg";
 import scissorsSvg from "../resources/icon-scissors.svg";
 import rockSvg from "../resources/icon-rock.svg";
+import GAME_OUTCOMES from "./constants";
 
 const uiController = (function () {
   const DOM_STRINGS = {
@@ -9,6 +10,8 @@ const uiController = (function () {
     gameOverlayContainer: ".game-overlay-container",
     score: ".score",
     gameBoard: ".game-board",
+    playAreaBackground: ".play-area-bg",
+    choicesContainer: ".choices-container",
   };
 
   const highlightHTML = `
@@ -82,6 +85,14 @@ const uiController = (function () {
         .insertAdjacentHTML("afterbegin", playAreaBackgroundHTML);
     },
 
+    removePlayAreaBackgroundHTML: function () {
+      const playAreaBackgroundNode = document.querySelector(
+        DOM_STRINGS.playAreaBackground
+      );
+
+      playAreaBackgroundNode.parentNode.removeChild(playAreaBackgroundNode);
+    },
+
     renderPlayerChoiceHTML: function () {
       document
         .querySelector(DOM_STRINGS.playAreaContainer)
@@ -103,11 +114,37 @@ const uiController = (function () {
         .insertAdjacentHTML("beforeend", newHTML);
     },
 
-    triggerGameBoardAnimation: function (playerChoice, botChoice) {
+    gameTieAnimation: function (userChoice) {
+      console.log("game tie");
+      let svgUrl;
+      let choicesContainer = document.querySelector(
+        DOM_STRINGS.choicesContainer
+      );
+
+      if (userChoice === "rock") {
+        svgUrl = rockSvg;
+      } else if (userChoice === "paper") {
+        svgUrl = paperSvg;
+      } else {
+        svgUrl = scissorsSvg;
+      }
+
+      const newHTML = `
+        <div class="choice-container ${userChoice} animate-bot-choice">
+          <div class="choice-white-bg">
+            <img src="${svgUrl}" alt="${userChoice}" />
+          </div>
+        </div>
+      `;
+
+      choicesContainer.insertAdjacentHTML("beforeend", newHTML);
+    },
+
+    triggerGameBoardAnimation: function (userChoice, botChoice, gameOutcome) {
       let choicesHTMLArr = document.querySelectorAll(".choice-container");
 
       choicesHTMLArr.forEach((choiceHTML) => {
-        if (choiceHTML.dataset.userChoice === playerChoice) {
+        if (choiceHTML.dataset.userChoice === userChoice) {
           choiceHTML.classList.add("animate-player-choice");
         } else if (choiceHTML.dataset.userChoice === botChoice) {
           choiceHTML.classList.add("animate-bot-choice");
@@ -115,6 +152,8 @@ const uiController = (function () {
           choiceHTML.parentNode.removeChild(choiceHTML);
         }
       });
+
+      if (gameOutcome === GAME_OUTCOMES.tie) this.gameTieAnimation(userChoice);
     },
 
     emptyGameBoardContainer: function () {
