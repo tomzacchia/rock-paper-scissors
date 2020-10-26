@@ -1,3 +1,5 @@
+import GAME_OUTCOMES from "./constants";
+
 const gameController = (function () {
   let state = {
     isGameActive: true,
@@ -13,7 +15,6 @@ const gameController = (function () {
 
   const toggleIsGameActive = function () {
     state.isGameActive = !state.isGameActive;
-    return state.isGameActive;
   };
 
   const generateBotChoice = function () {
@@ -26,18 +27,18 @@ const gameController = (function () {
 
   const determineOutcome = function (userChoice, botChoice) {
     if (userChoice === botChoice) {
-      return "tie";
+      return GAME_OUTCOMES.tie;
     } else if (winningPairings[userChoice] === botChoice) {
-      return "win";
+      return GAME_OUTCOMES.win;
     } else {
-      return "loss";
+      return GAME_OUTCOMES.lose;
     }
   };
 
   const updateScore = function (outcomeType) {
-    if (outcomeType === "win") {
+    if (outcomeType === GAME_OUTCOMES.win) {
       state.playerScore += 1;
-    } else if (outcomeType === "loss") {
+    } else if (outcomeType === GAME_OUTCOMES.lose) {
       state.playerScore -= 1;
     }
 

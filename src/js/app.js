@@ -1,10 +1,25 @@
 import "../scss/styles.scss";
 import gameController from "./game-controller";
 import uiController from "./ui-controller";
+import GAME_OUTCOMES from "./constants";
 
 const appController = (function (gameController, uiController) {
   const userChoiceHandler = function (userChoice) {
+    let score;
+    gameController.toggleIsGameActive();
+
     const botChoice = gameController.generateBotChoice();
+    const gameOutcome = gameController.determineOutcome(userChoice, botChoice);
+
+    // if (gameOutcome === GAME_OUTCOMES.tie) {
+
+    // }
+
+    if (gameOutcome === GAME_OUTCOMES.win) {
+      score = gameController.updateScore(GAME_OUTCOMES.win);
+    } else if (gameOutcome === GAME_OUTCOMES.lose) {
+      score = gameController.updateScore(GAME_OUTCOMES.lose);
+    }
   };
 
   const setupEventLiseners = function () {
