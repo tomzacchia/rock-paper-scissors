@@ -76,9 +76,6 @@ const gameController = (function () {
   };
 
   return {
-    init: function () {
-      console.log("gameController");
-    },
     getIsGameActive,
     toggleIsGameActive,
     generateBotChoice,
