@@ -57,13 +57,15 @@ const gameController = (function () {
     state.gameOutcome = null;
   };
 
+  const getIsGameActive = function () {
+    return state.isGameActive;
+  };
+
   return {
     init: function () {
       console.log("gameController");
     },
-    getIsGameActive: function () {
-      return state.isGameActive;
-    },
+    getIsGameActive,
     toggleIsGameActive,
     generateBotChoice,
     determineOutcome,

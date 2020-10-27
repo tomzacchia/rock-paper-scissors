@@ -5,13 +5,17 @@ import GAME_OUTCOMES from "./constants";
 
 const uiController = (function () {
   const DOM_STRINGS = {
-    backgroundEffectContainer: ".background-effects-container",
-    playAreaContainer: ".play-area-container",
-    gameOverlayContainer: ".game-overlay-container",
     score: ".score",
+    backgroundEffectContainer: ".background-effects-container",
     gameBoard: ".game-board",
     playAreaBackground: ".play-area-bg",
+    playAreaContainer: ".play-area-container",
     choicesContainer: ".choices-container",
+    choiceContainer: ".choice-container",
+    gameOverlayContainer: ".game-overlay-container",
+    rulesButton: ".rules-button",
+    modalContainer: ".modal-container",
+    modalClose: ".modal-close",
   };
 
   const highlightHTML = `
@@ -68,7 +72,7 @@ const uiController = (function () {
     return newHtml;
   };
 
-  const gameTieAnimation = function (userChoice) {
+  const insertDuplicate = function (userChoice) {
     let svgUrl;
     let choicesContainer = document.querySelector(DOM_STRINGS.choicesContainer);
 
@@ -91,95 +95,108 @@ const uiController = (function () {
     choicesContainer.insertAdjacentHTML("beforeend", newHTML);
   };
 
+  const renderPlayAreaBackgroundHTML = function () {
+    document
+      .querySelector(DOM_STRINGS.playAreaContainer)
+      .insertAdjacentHTML("afterbegin", playAreaBackgroundHTML);
+  };
+
+  const removePlayAreaBackgroundHTML = function () {
+    const playAreaBackgroundNode = document.querySelector(
+      DOM_STRINGS.playAreaBackground
+    );
+
+    playAreaBackgroundNode.parentNode.removeChild(playAreaBackgroundNode);
+  };
+
+  const renderPlayerChoicesHTML = function () {
+    document
+      .querySelector(DOM_STRINGS.playAreaContainer)
+      .insertAdjacentHTML("beforeend", playerChoicesHTML);
+  };
+
+  const triggerGameBoardAnimation = function (
+    userChoice,
+    botChoice,
+    gameOutcome
+  ) {
+    let choicesHTMLArr = document.querySelectorAll(".choice-container");
+
+    choicesHTMLArr.forEach((choiceHTML) => {
+      if (choiceHTML.dataset.userChoice === userChoice) {
+        choiceHTML.classList.add("animate-player-choice");
+      } else if (choiceHTML.dataset.userChoice === botChoice) {
+        choiceHTML.classList.add("animate-bot-choice");
+      } else {
+        choiceHTML.parentNode.removeChild(choiceHTML);
+      }
+    });
+
+    if (gameOutcome === GAME_OUTCOMES.tie) insertDuplicate(userChoice);
+  };
+
+  const renderHighlightHTML = function (gameOutcome) {
+    let isPlayerWinner = gameOutcome === GAME_OUTCOMES.win;
+
+    if (gameOutcome === GAME_OUTCOMES.tie) return;
+
+    const highlightHTML = formatHighlightHTML(isPlayerWinner);
+
+    document
+      .querySelector(DOM_STRINGS.backgroundEffectContainer)
+      .insertAdjacentHTML("afterbegin", highlightHTML);
+  };
+
+  const updateScoreInnerHTML = function (score) {
+    const scoreHTML = document.querySelector(DOM_STRINGS.score);
+
+    scoreHTML.innerHTML = score;
+  };
+
+  const renderGameOveralyHTML = function (gameOutcome) {
+    let message, newHTML;
+
+    if (gameOutcome === GAME_OUTCOMES.win) {
+      message = "YOU WIN";
+    } else if (gameOutcome === GAME_OUTCOMES.lose) {
+      message = "YOU LOSE";
+    } else {
+      message = "TIE";
+    }
+
+    newHTML = gameOverlayHTML.replace("%message%", message);
+
+    document
+      .querySelector(DOM_STRINGS.gameOverlayContainer)
+      .insertAdjacentHTML("beforeend", newHTML);
+  };
+
+  const emptyGameBoardContainer = function () {
+    const containersToBeEmptied = [
+      document.querySelector(DOM_STRINGS.backgroundEffectContainer),
+      document.querySelector(DOM_STRINGS.playAreaContainer),
+      document.querySelector(DOM_STRINGS.gameOverlayContainer),
+    ];
+
+    containersToBeEmptied.forEach((container) => (container.innerHTML = ""));
+  };
+
+  const init = function () {
+    renderPlayAreaBackgroundHTML();
+    renderPlayerChoicesHTML();
+  };
+
   return {
     domStrings: DOM_STRINGS,
-
-    renderPlayAreaBackgroundHTML: function () {
-      document
-        .querySelector(DOM_STRINGS.playAreaContainer)
-        .insertAdjacentHTML("afterbegin", playAreaBackgroundHTML);
-    },
-
-    removePlayAreaBackgroundHTML: function () {
-      const playAreaBackgroundNode = document.querySelector(
-        DOM_STRINGS.playAreaBackground
-      );
-
-      playAreaBackgroundNode.parentNode.removeChild(playAreaBackgroundNode);
-    },
-
-    renderPlayerChoicesHTML: function () {
-      document
-        .querySelector(DOM_STRINGS.playAreaContainer)
-        .insertAdjacentHTML("beforeend", playerChoicesHTML);
-    },
-
-    triggerGameBoardAnimation: function (userChoice, botChoice, gameOutcome) {
-      let choicesHTMLArr = document.querySelectorAll(".choice-container");
-
-      choicesHTMLArr.forEach((choiceHTML) => {
-        if (choiceHTML.dataset.userChoice === userChoice) {
-          choiceHTML.classList.add("animate-player-choice");
-        } else if (choiceHTML.dataset.userChoice === botChoice) {
-          choiceHTML.classList.add("animate-bot-choice");
-        } else {
-          choiceHTML.parentNode.removeChild(choiceHTML);
-        }
-      });
-
-      if (gameOutcome === GAME_OUTCOMES.tie) gameTieAnimation(userChoice);
-    },
-
-    renderHighlightHTML: function (gameOutcome) {
-      let isPlayerWinner = gameOutcome === GAME_OUTCOMES.win;
-
-      if (gameOutcome === GAME_OUTCOMES.tie) return;
-
-      const highlightHTML = formatHighlightHTML(isPlayerWinner);
-
-      document
-        .querySelector(DOM_STRINGS.backgroundEffectContainer)
-        .insertAdjacentHTML("afterbegin", highlightHTML);
-    },
-
-    updateScore: function (score) {
-      const scoreHTML = document.querySelector(DOM_STRINGS.score);
-
-      scoreHTML.innerHTML = score;
-    },
-
-    renderGameOveralyHTML: function (gameOutcome) {
-      let message, newHTML;
-
-      if (gameOutcome === GAME_OUTCOMES.win) {
-        message = "YOU WIN";
-      } else if (gameOutcome === GAME_OUTCOMES.lose) {
-        message = "YOU LOSE";
-      } else {
-        message = "TIE";
-      }
-
-      newHTML = gameOverlayHTML.replace("%message%", message);
-
-      document
-        .querySelector(DOM_STRINGS.gameOverlayContainer)
-        .insertAdjacentHTML("beforeend", newHTML);
-    },
-
-    emptyGameBoardContainer: function () {
-      const containersToBeEmptied = [
-        document.querySelector(DOM_STRINGS.backgroundEffectContainer),
-        document.querySelector(DOM_STRINGS.playAreaContainer),
-        document.querySelector(DOM_STRINGS.gameOverlayContainer),
-      ];
-
-      containersToBeEmptied.forEach((container) => (container.innerHTML = ""));
-    },
-
-    init: function () {
-      this.renderPlayAreaBackgroundHTML();
-      this.renderPlayerChoicesHTML();
-    },
+    init,
+    renderPlayAreaBackgroundHTML,
+    removePlayAreaBackgroundHTML,
+    renderPlayerChoicesHTML,
+    triggerGameBoardAnimation,
+    renderHighlightHTML,
+    updateScoreInnerHTML,
+    renderGameOveralyHTML,
+    emptyGameBoardContainer,
   };
 })();
 

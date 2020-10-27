@@ -1,7 +1,6 @@
 import "../scss/styles.scss";
 import gameController from "./game-controller";
 import uiController from "./ui-controller";
-import GAME_OUTCOMES from "./constants";
 
 const appController = (function (gameController, uiController) {
   const userChoiceHandler = function (userChoice) {
@@ -17,7 +16,7 @@ const appController = (function (gameController, uiController) {
 
     setTimeout(() => {
       uiController.renderHighlightHTML(gameOutcome);
-      uiController.updateScore(score);
+      uiController.updateScoreInnerHTML(score);
       uiController.renderGameOveralyHTML(gameOutcome);
     }, 1000);
   };
@@ -33,23 +32,27 @@ const appController = (function (gameController, uiController) {
   };
 
   const toggleModalDisplay = function () {
-    let rulesModal = document.querySelector(".modal-container");
+    let rulesModal = document.querySelector(
+      uiController.domStrings.modalContainer
+    );
     rulesModal.classList.toggle("display-none");
   };
 
   const setupEventLiseners = function () {
-    let rulesButton, playAreaContainer, rulesModal, closeModal;
+    let rulesButton, playAreaContainer, closeModal;
 
     playAreaContainer = document.querySelector(
       uiController.domStrings.playAreaContainer
     );
-    rulesButton = document.querySelector(".rules-button");
-    closeModal = document.querySelector(".modal-close");
+    rulesButton = document.querySelector(uiController.domStrings.rulesButton);
+    closeModal = document.querySelector(uiController.domStrings.modalClose);
 
     // user clicks on rock, paper or scissors
     playAreaContainer.addEventListener("click", function (event) {
       const target = event.target;
-      const choiceContainer = target.closest(".choice-container");
+      const choiceContainer = target.closest(
+        uiController.domStrings.choiceContainer
+      );
 
       if (!choiceContainer) return;
 
