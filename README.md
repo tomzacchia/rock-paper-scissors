@@ -24,7 +24,6 @@ Maintain the state of the score after refreshing the browser (optional)
 
 ## Lessons Learned
 * [MVC in JS]()
-* [Event Delegation]()
 * [Debugging ios Safari]()
 
 ## Acknowledgements
