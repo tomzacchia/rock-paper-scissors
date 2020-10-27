@@ -68,7 +68,7 @@ const uiController = (function () {
     return newHtml;
   };
 
-  const gameTieAnimation = function (userChoice) {
+  const insertDuplicate = function (userChoice) {
     let svgUrl;
     let choicesContainer = document.querySelector(DOM_STRINGS.choicesContainer);
 
@@ -128,7 +128,7 @@ const uiController = (function () {
       }
     });
 
-    if (gameOutcome === GAME_OUTCOMES.tie) gameTieAnimation(userChoice);
+    if (gameOutcome === GAME_OUTCOMES.tie) insertDuplicate(userChoice);
   };
 
   const renderHighlightHTML = function (gameOutcome) {
