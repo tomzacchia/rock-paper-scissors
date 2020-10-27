@@ -5,13 +5,17 @@ import GAME_OUTCOMES from "./constants";
 
 const uiController = (function () {
   const DOM_STRINGS = {
-    backgroundEffectContainer: ".background-effects-container",
-    playAreaContainer: ".play-area-container",
-    gameOverlayContainer: ".game-overlay-container",
     score: ".score",
+    backgroundEffectContainer: ".background-effects-container",
     gameBoard: ".game-board",
     playAreaBackground: ".play-area-bg",
+    playAreaContainer: ".play-area-container",
     choicesContainer: ".choices-container",
+    choiceContainer: ".choice-container",
+    gameOverlayContainer: ".game-overlay-container",
+    rulesButton: ".rules-button",
+    modalContainer: ".modal-container",
+    modalClose: ".modal-close",
   };
 
   const highlightHTML = `
