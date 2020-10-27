@@ -91,8 +91,20 @@ const appController = (function (gameController, uiController) {
     });
   };
 
+  const handleInitialLoad = function () {
+    let score;
+
+    if (!localStorage.getItem("score")) return;
+
+    score = localStorage.getItem("score");
+
+    gameController.setScore(score);
+    uiController.updateScoreInnerHTML(score);
+  };
+
   return {
     init: function () {
+      handleInitialLoad();
       uiController.init();
       setupEventLiseners();
     },
