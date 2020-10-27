@@ -2,7 +2,7 @@
 
 [Demo](https://rock-paper-scissors.tomzacchia.vercel.app/)
 
-<img src="./design/desktop-preview.jpg" alt="Map" width="50%" height="50%" />
+<img src="./design/desktop-step-4-lose.jpg" alt="Game" width="50%" height="50%" />
 
 ## The challenge
 
