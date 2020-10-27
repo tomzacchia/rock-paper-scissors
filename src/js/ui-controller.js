@@ -66,8 +66,8 @@ const uiController = (function () {
     let newHtml;
 
     isPlayerWinner
-      ? (newHtml = highlightHTML.replaceAll("%winner%", "left"))
-      : (newHtml = highlightHTML.replaceAll("%winner%", "right"));
+      ? (newHtml = highlightHTML.replace(/%winner%/gi, "left"))
+      : (newHtml = highlightHTML.replace(/%winner%/gi, "right"));
 
     return newHtml;
   };
