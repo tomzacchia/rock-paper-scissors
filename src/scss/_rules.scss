@@ -3,10 +3,9 @@
 .rules-button {
   position: fixed;
   left: 50%;
-  bottom: 6rem;
-  padding: 1rem 3rem;
-  margin-left: -75px;
-  border: solid thin white;
+  padding: 12px 2rem;
+  margin-left: -60px;
+  border: solid thin rgb(252, 201, 201);
   border-radius: 6px;
   background: transparent;
   color: white;
@@ -18,5 +17,7 @@
     left: unset;
     right: 2rem;
     bottom: 3rem;
+    padding: 1rem 3rem;
+    margin-left: -75px;
   }
 }
