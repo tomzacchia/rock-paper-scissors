@@ -34,6 +34,7 @@ $choice-container-padding: 15px;
   border-radius: 50%;
   position: absolute;
   transition: all 1s ease-in-out;
+  box-shadow: inset -1px -6px 0px 0px #0606066b;
 
   &:hover {
     cursor: pointer;
@@ -44,21 +45,21 @@ $choice-container-padding: 15px;
   top: 25px;
   left: 50%;
   margin-left: -170px;
-  background-color: blue;
+  background-color: #1e88e5;
 }
 
 .scissors {
   top: 25px;
   left: 50%;
   margin-left: 40px;
-  background-color: orange;
+  background-color: #ffeb3b;
 }
 
 .rock {
   top: 210px;
   left: 50%;
   margin-left: -(($choice-container-padding * 2) + $choice-white-bg-diameter) /2;
-  background-color: red;
+  background-color: #f44336;
 }
 
 .choice-white-bg {
@@ -67,6 +68,7 @@ $choice-container-padding: 15px;
   height: $choice-white-bg-diameter;
   border-radius: 50%;
   background-color: white;
+  box-shadow: inset 0px 7px 0px 0px #a9a6a66b;
 
   &:hover {
     cursor: pointer;
