@@ -82,10 +82,29 @@ const appController = (function (gameController, uiController) {
     closeModal.addEventListener("click", function () {
       toggleModalDisplay();
     });
+
+    // save score to localStorage
+    window.addEventListener("beforeunload", function () {
+      const score = gameController.getScore();
+
+      localStorage.setItem("score", score.toString());
+    });
+  };
+
+  const handleInitialLoad = function () {
+    let score;
+
+    if (!localStorage.getItem("score")) return;
+
+    score = localStorage.getItem("score");
+
+    gameController.setScore(score);
+    uiController.updateScoreInnerHTML(score);
   };
 
   return {
     init: function () {
+      handleInitialLoad();
       uiController.init();
       setupEventLiseners();
     },
