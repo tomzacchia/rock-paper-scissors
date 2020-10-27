@@ -61,6 +61,20 @@ const gameController = (function () {
     return state.isGameActive;
   };
 
+  const getScore = function () {
+    return state.playerScore;
+  };
+
+  const setScore = function (scoreString) {
+    if (!scoreString) return;
+
+    const scoreInt = parseInt(scoreString);
+
+    state.playerScore = scoreInt;
+
+    return scoreInt;
+  };
+
   return {
     init: function () {
       console.log("gameController");
@@ -71,6 +85,8 @@ const gameController = (function () {
     determineOutcome,
     updateScore,
     resetGameOutcome,
+    getScore,
+    setScore,
   };
 })();
 

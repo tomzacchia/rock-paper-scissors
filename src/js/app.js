@@ -82,6 +82,13 @@ const appController = (function (gameController, uiController) {
     closeModal.addEventListener("click", function () {
       toggleModalDisplay();
     });
+
+    // save score to localStorage
+    window.addEventListener("beforeunload", function () {
+      const score = gameController.getScore();
+
+      localStorage.setItem("score", score.toString());
+    });
   };
 
   return {
