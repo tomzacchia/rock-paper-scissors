@@ -21,6 +21,8 @@ p {
 .attribution {
   position: fixed;
   bottom: 1rem;
+  left: 50%;
+  margin-left: -170px;
   color: white;
 }
 
@@ -44,7 +46,6 @@ p {
 
 .game-board {
   position: relative;
-  padding-top: 6rem;
   overflow-x: hidden;
 }
 
