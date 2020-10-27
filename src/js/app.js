@@ -1,7 +1,6 @@
 import "../scss/styles.scss";
 import gameController from "./game-controller";
 import uiController from "./ui-controller";
-import GAME_OUTCOMES from "./constants";
 
 const appController = (function (gameController, uiController) {
   const userChoiceHandler = function (userChoice) {
