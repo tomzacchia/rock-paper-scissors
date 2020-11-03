@@ -62,7 +62,22 @@ const uiController = (function () {
     </div>
   `;
 
-  const formatHighlightHTML = function (isPlayerWinner) {
+  return {
+    domStrings: DOM_STRINGS,
+    init,
+    renderPlayAreaBackgroundHTML,
+    removePlayAreaBackgroundHTML,
+    renderPlayerChoicesHTML,
+    triggerGameBoardAnimation,
+    renderHighlightHTML,
+    updateScoreInnerHTML,
+    renderGameOveralyHTML,
+    emptyGameBoardContainer,
+  };
+
+  // ******************************************************
+
+  function formatHighlightHTML(isPlayerWinner) {
     let newHtml;
 
     isPlayerWinner
@@ -70,9 +85,9 @@ const uiController = (function () {
       : (newHtml = highlightHTML.replace(/%winner%/gi, "right"));
 
     return newHtml;
-  };
+  }
 
-  const insertDuplicate = function (userChoice) {
+  function insertDuplicate(userChoice) {
     let svgUrl;
     let choicesContainer = document.querySelector(DOM_STRINGS.choicesContainer);
 
@@ -93,33 +108,29 @@ const uiController = (function () {
     `;
 
     choicesContainer.insertAdjacentHTML("beforeend", newHTML);
-  };
+  }
 
-  const renderPlayAreaBackgroundHTML = function () {
+  function renderPlayAreaBackgroundHTML() {
     document
       .querySelector(DOM_STRINGS.playAreaContainer)
       .insertAdjacentHTML("afterbegin", playAreaBackgroundHTML);
-  };
+  }
 
-  const removePlayAreaBackgroundHTML = function () {
+  function removePlayAreaBackgroundHTML() {
     const playAreaBackgroundNode = document.querySelector(
       DOM_STRINGS.playAreaBackground
     );
 
     playAreaBackgroundNode.parentNode.removeChild(playAreaBackgroundNode);
-  };
+  }
 
-  const renderPlayerChoicesHTML = function () {
+  function renderPlayerChoicesHTML() {
     document
       .querySelector(DOM_STRINGS.playAreaContainer)
       .insertAdjacentHTML("beforeend", playerChoicesHTML);
-  };
+  }
 
-  const triggerGameBoardAnimation = function (
-    userChoice,
-    botChoice,
-    gameOutcome
-  ) {
+  function triggerGameBoardAnimation(userChoice, botChoice, gameOutcome) {
     let choicesHTMLArr = document.querySelectorAll(".choice-container");
 
     choicesHTMLArr.forEach(addAnimationClass);
@@ -135,9 +146,9 @@ const uiController = (function () {
         choiceHTML.parentNode.removeChild(choiceHTML);
       }
     }
-  };
+  }
 
-  const renderHighlightHTML = function (gameOutcome) {
+  function renderHighlightHTML(gameOutcome) {
     let isPlayerWinner = gameOutcome === GAME_OUTCOMES.win;
 
     if (gameOutcome === GAME_OUTCOMES.tie) return;
@@ -147,15 +158,15 @@ const uiController = (function () {
     document
       .querySelector(DOM_STRINGS.backgroundEffectContainer)
       .insertAdjacentHTML("afterbegin", highlightHTML);
-  };
+  }
 
-  const updateScoreInnerHTML = function (score) {
+  function updateScoreInnerHTML(score) {
     const scoreHTML = document.querySelector(DOM_STRINGS.score);
 
     scoreHTML.innerHTML = score;
-  };
+  }
 
-  const renderGameOveralyHTML = function (gameOutcome) {
+  function renderGameOveralyHTML(gameOutcome) {
     let message, newHTML;
 
     if (gameOutcome === GAME_OUTCOMES.win) {
@@ -171,9 +182,9 @@ const uiController = (function () {
     document
       .querySelector(DOM_STRINGS.gameOverlayContainer)
       .insertAdjacentHTML("beforeend", newHTML);
-  };
+  }
 
-  const emptyGameBoardContainer = function () {
+  function emptyGameBoardContainer() {
     const containers = [
       document.querySelector(DOM_STRINGS.backgroundEffectContainer),
       document.querySelector(DOM_STRINGS.playAreaContainer),
@@ -185,25 +196,12 @@ const uiController = (function () {
     function emptyContainerInnerHTML(container) {
       container.innerHTML = "";
     }
-  };
+  }
 
-  const init = function () {
+  function init() {
     renderPlayAreaBackgroundHTML();
     renderPlayerChoicesHTML();
-  };
-
-  return {
-    domStrings: DOM_STRINGS,
-    init,
-    renderPlayAreaBackgroundHTML,
-    removePlayAreaBackgroundHTML,
-    renderPlayerChoicesHTML,
-    triggerGameBoardAnimation,
-    renderHighlightHTML,
-    updateScoreInnerHTML,
-    renderGameOveralyHTML,
-    emptyGameBoardContainer,
-  };
+  }
 })();
 
 export default uiController;
