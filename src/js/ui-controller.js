@@ -122,7 +122,11 @@ const uiController = (function () {
   ) {
     let choicesHTMLArr = document.querySelectorAll(".choice-container");
 
-    choicesHTMLArr.forEach((choiceHTML) => {
+    choicesHTMLArr.forEach(addAnimationClass);
+
+    if (gameOutcome === GAME_OUTCOMES.tie) insertDuplicate(userChoice);
+
+    function addAnimationClass(choiceHTML) {
       if (choiceHTML.dataset.userChoice === userChoice) {
         choiceHTML.classList.add("animate-player-choice");
       } else if (choiceHTML.dataset.userChoice === botChoice) {
@@ -130,9 +134,7 @@ const uiController = (function () {
       } else {
         choiceHTML.parentNode.removeChild(choiceHTML);
       }
-    });
-
-    if (gameOutcome === GAME_OUTCOMES.tie) insertDuplicate(userChoice);
+    }
   };
 
   const renderHighlightHTML = function (gameOutcome) {
@@ -172,13 +174,17 @@ const uiController = (function () {
   };
 
   const emptyGameBoardContainer = function () {
-    const containersToBeEmptied = [
+    const containers = [
       document.querySelector(DOM_STRINGS.backgroundEffectContainer),
       document.querySelector(DOM_STRINGS.playAreaContainer),
       document.querySelector(DOM_STRINGS.gameOverlayContainer),
     ];
 
-    containersToBeEmptied.forEach((container) => (container.innerHTML = ""));
+    containers.forEach(emptyContainerInnerHTML);
+
+    function emptyContainerInnerHTML(container) {
+      container.innerHTML = "";
+    }
   };
 
   const init = function () {
