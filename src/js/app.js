@@ -13,39 +13,15 @@ const appController = (function (gameController, uiController) {
 
   // ************************************
 
-  function userChoiceHandler(userChoice) {
-    let score, botChoice, gameOutcome;
+  function handleInitialLoad() {
+    let score;
 
-    gameController.toggleIsGameActive();
-    botChoice = gameController.generateBotChoice();
-    gameOutcome = gameController.determineOutcome(userChoice, botChoice);
-    score = gameController.updateScore();
+    if (!localStorage.getItem("score")) return;
 
-    uiController.removePlayAreaBackgroundHTML();
-    uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
+    score = localStorage.getItem("score");
 
-    setTimeout(() => {
-      uiController.renderHighlightHTML(gameOutcome);
-      uiController.updateScoreInnerHTML(score);
-      uiController.renderGameOveralyHTML(gameOutcome);
-    }, 1000);
-  }
-
-  function resetBoardHandler() {
-    uiController.emptyGameBoardContainer();
-    gameController.toggleIsGameActive();
-    gameController.resetGameOutcome();
-
-    setTimeout(() => {
-      uiController.init();
-    }, 400);
-  }
-
-  function toggleModalDisplay() {
-    let rulesModal = document.querySelector(
-      uiController.domStrings.modalContainer
-    );
-    rulesModal.classList.toggle("display-none");
+    gameController.setScore(score);
+    uiController.updateScoreInnerHTML(score);
   }
 
   function setupEventLiseners() {
@@ -101,15 +77,39 @@ const appController = (function (gameController, uiController) {
     });
   }
 
-  function handleInitialLoad() {
-    let score;
+  function userChoiceHandler(userChoice) {
+    let score, botChoice, gameOutcome;
 
-    if (!localStorage.getItem("score")) return;
+    gameController.toggleIsGameActive();
+    botChoice = gameController.generateBotChoice();
+    gameOutcome = gameController.determineOutcome(userChoice, botChoice);
+    score = gameController.updateScore();
 
-    score = localStorage.getItem("score");
+    uiController.removePlayAreaBackgroundHTML();
+    uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
 
-    gameController.setScore(score);
-    uiController.updateScoreInnerHTML(score);
+    setTimeout(() => {
+      uiController.renderHighlightHTML(gameOutcome);
+      uiController.updateScoreInnerHTML(score);
+      uiController.renderGameOveralyHTML(gameOutcome);
+    }, 1000);
+  }
+
+  function resetBoardHandler() {
+    uiController.emptyGameBoardContainer();
+    gameController.toggleIsGameActive();
+    gameController.resetGameOutcome();
+
+    setTimeout(() => {
+      uiController.init();
+    }, 400);
+  }
+
+  function toggleModalDisplay() {
+    let rulesModal = document.querySelector(
+      uiController.domStrings.modalContainer
+    );
+    rulesModal.classList.toggle("display-none");
   }
 })(gameController, uiController);
 
