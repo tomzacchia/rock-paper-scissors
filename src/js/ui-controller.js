@@ -2,6 +2,7 @@ import paperSvg from "../resources/icon-paper.svg";
 import scissorsSvg from "../resources/icon-scissors.svg";
 import rockSvg from "../resources/icon-rock.svg";
 import GAME_OUTCOMES from "./constants";
+import HTML_MARKUP_CONSTANTS from "./ui-constants";
 
 const uiController = (function () {
   const DOM_STRINGS = {
@@ -18,25 +19,12 @@ const uiController = (function () {
     modalClose: ".modal-close",
   };
 
-  const highlightHTML = `
-    <div class="highlight-container highlight-container-%winner%">
-      <div class="highlight highlight-sm highlight-sm-%winner%"></div>
-      <div class="highlight highlight-md highlight-md-%winner%"></div>
-      <div class="highlight highlight-lg highlight-lg-%winner%"></div>
-    </div>
-  `;
-
-  const playAreaBackgroundHTML = `
-    <div class="play-area-bg absolute-horizontal-center"></div>
-  `;
-
-  const choiceHTML = `
-    <div class="choice-container %choice-type%" data-user-choice="%choice-type%">
-      <div class="choice-white-bg">
-        <img src="%img-url%" alt="%choice-type%" />
-      </div>
-    </div>
-  `;
+  const {
+    highlightHTML,
+    playAreaBackgroundHTML,
+    choiceHTML,
+    gameOverlayHTML,
+  } = HTML_MARKUP_CONSTANTS;
 
   const choicesContainerHTML = `
     <div class="choices-container absolute-horizontal-center">
@@ -45,18 +33,6 @@ const uiController = (function () {
           return formatChoiceType(choiceType);
         })
         .join("")}
-    </div>
-  `;
-
-  const gameOverlayHTML = `
-    <div class="winner-message-container">
-      <p>YOU PICKED</p>
-      <p class="message-right">THE HOUSE PICKED</p>
-    </div>
-
-    <div class="button-container">
-      <h1>%message%</h1>
-      <button class="play-again-button">PLAY AGAIN</button>
     </div>
   `;
 
