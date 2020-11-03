@@ -8,24 +8,38 @@ const gameController = (function () {
   };
 
   const choices = ["rock", "paper", "scissors"];
+
   const winningPairings = {
     rock: "scissors",
     paper: "rock",
     scissors: "paper",
   };
 
-  const toggleIsGameActive = function () {
-    state.isGameActive = !state.isGameActive;
+  return {
+    getIsGameActive,
+    toggleIsGameActive,
+    generateBotChoice,
+    determineOutcome,
+    updateScore,
+    resetGameOutcome,
+    getScore,
+    setScore,
   };
 
-  const generateBotChoice = function () {
+  // ********************************
+
+  function toggleIsGameActive() {
+    state.isGameActive = !state.isGameActive;
+  }
+
+  function generateBotChoice() {
     const randomInt = Math.round(Math.random() * (choices.length - 1));
     const botChoice = choices[randomInt];
 
     return botChoice;
-  };
+  }
 
-  const determineOutcome = function (userChoice, botChoice) {
+  function determineOutcome(userChoice, botChoice) {
     let gameOutcome;
 
     if (userChoice === botChoice) {
@@ -39,9 +53,9 @@ const gameController = (function () {
     state.gameOutcome = gameOutcome;
 
     return gameOutcome;
-  };
+  }
 
-  const updateScore = function () {
+  function updateScore() {
     const gameOutcome = state.gameOutcome;
 
     if (gameOutcome === GAME_OUTCOMES.win) {
@@ -51,21 +65,21 @@ const gameController = (function () {
     }
 
     return state.playerScore;
-  };
+  }
 
-  const resetGameOutcome = function () {
+  function resetGameOutcome() {
     state.gameOutcome = null;
-  };
+  }
 
-  const getIsGameActive = function () {
+  function getIsGameActive() {
     return state.isGameActive;
-  };
+  }
 
-  const getScore = function () {
+  function getScore() {
     return state.playerScore;
-  };
+  }
 
-  const setScore = function (scoreString) {
+  function setScore(scoreString) {
     if (!scoreString) return;
 
     const scoreInt = parseInt(scoreString);
@@ -73,18 +87,7 @@ const gameController = (function () {
     state.playerScore = scoreInt;
 
     return scoreInt;
-  };
-
-  return {
-    getIsGameActive,
-    toggleIsGameActive,
-    generateBotChoice,
-    determineOutcome,
-    updateScore,
-    resetGameOutcome,
-    getScore,
-    setScore,
-  };
+  }
 })();
 
 export default gameController;
