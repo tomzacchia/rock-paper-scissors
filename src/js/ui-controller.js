@@ -30,23 +30,21 @@ const uiController = (function () {
     <div class="play-area-bg absolute-horizontal-center"></div>
   `;
 
-  const playerChoicesHTML = `
+  const choiceHTML = `
+    <div class="choice-container %choice-type%" data-user-choice="%choice-type%">
+      <div class="choice-white-bg">
+        <img src="%img-url%" alt="%choice-type%" />
+      </div>
+    </div>
+  `;
+
+  const choicesContainerHTML = `
     <div class="choices-container absolute-horizontal-center">
-      <div class="choice-container paper" data-user-choice="paper">
-        <div class="choice-white-bg">
-          <img src="${paperSvg}" alt="paper" />
-        </div>
-      </div>
-      <div class="choice-container scissors" data-user-choice="scissors">
-        <div class="choice-white-bg">
-          <img src="${scissorsSvg}" alt="scissors" />
-        </div>
-      </div>
-      <div class="choice-container rock" data-user-choice="rock">
-        <div class="choice-white-bg">
-          <img src="${rockSvg}" alt="rock" />
-        </div>
-      </div>
+      ${["rock", "scissors", "paper"]
+        .map(function createChoiceHtml(choiceType) {
+          return formatChoiceType(choiceType);
+        })
+        .join("")}
     </div>
   `;
 
@@ -76,6 +74,23 @@ const uiController = (function () {
   };
 
   // ******************************************************
+
+  function formatChoiceType(choiceType) {
+    const choiceTypeImageUrlMap = {
+      paper: paperSvg,
+      scissors: scissorsSvg,
+      rock: rockSvg,
+    };
+
+    let formattedChoiceHtml = choiceHTML.replace(/%choice-type%/gi, choiceType);
+
+    formattedChoiceHtml = formattedChoiceHtml.replace(
+      "%img-url%",
+      choiceTypeImageUrlMap[choiceType]
+    );
+
+    return formattedChoiceHtml;
+  }
 
   function formatHighlightHTML(isPlayerWinner) {
     let newHtml;
@@ -127,7 +142,7 @@ const uiController = (function () {
   function renderPlayerChoicesHTML() {
     document
       .querySelector(DOM_STRINGS.playAreaContainer)
-      .insertAdjacentHTML("beforeend", playerChoicesHTML);
+      .insertAdjacentHTML("beforeend", choicesContainerHTML);
   }
 
   function triggerGameBoardAnimation(userChoice, botChoice, gameOutcome) {
