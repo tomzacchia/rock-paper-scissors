@@ -3,7 +3,17 @@ import gameController from "./game-controller";
 import uiController from "./ui-controller";
 
 const appController = (function (gameController, uiController) {
-  const userChoiceHandler = function (userChoice) {
+  return {
+    init: function () {
+      handleInitialLoad();
+      uiController.init();
+      setupEventLiseners();
+    },
+  };
+
+  // ************************************
+
+  function userChoiceHandler(userChoice) {
     let score, botChoice, gameOutcome;
 
     gameController.toggleIsGameActive();
@@ -19,9 +29,9 @@ const appController = (function (gameController, uiController) {
       uiController.updateScoreInnerHTML(score);
       uiController.renderGameOveralyHTML(gameOutcome);
     }, 1000);
-  };
+  }
 
-  const resetBoardHandler = function () {
+  function resetBoardHandler() {
     uiController.emptyGameBoardContainer();
     gameController.toggleIsGameActive();
     gameController.resetGameOutcome();
@@ -29,16 +39,16 @@ const appController = (function (gameController, uiController) {
     setTimeout(() => {
       uiController.init();
     }, 400);
-  };
+  }
 
-  const toggleModalDisplay = function () {
+  function toggleModalDisplay() {
     let rulesModal = document.querySelector(
       uiController.domStrings.modalContainer
     );
     rulesModal.classList.toggle("display-none");
-  };
+  }
 
-  const setupEventLiseners = function () {
+  function setupEventLiseners() {
     let rulesButton, playAreaContainer, closeModal;
 
     playAreaContainer = document.querySelector(
@@ -89,9 +99,9 @@ const appController = (function (gameController, uiController) {
 
       localStorage.setItem("score", score.toString());
     });
-  };
+  }
 
-  const handleInitialLoad = function () {
+  function handleInitialLoad() {
     let score;
 
     if (!localStorage.getItem("score")) return;
@@ -100,15 +110,7 @@ const appController = (function (gameController, uiController) {
 
     gameController.setScore(score);
     uiController.updateScoreInnerHTML(score);
-  };
-
-  return {
-    init: function () {
-      handleInitialLoad();
-      uiController.init();
-      setupEventLiseners();
-    },
-  };
+  }
 })(gameController, uiController);
 
 appController.init();
