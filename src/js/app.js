@@ -28,7 +28,7 @@ const appController = (function (gameController, uiController) {
 
     setTimeout(() => {
       uiController.init();
-    }, 1000);
+    }, 400);
   };
 
   const toggleModalDisplay = function () {
