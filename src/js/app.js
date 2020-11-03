@@ -3,42 +3,28 @@ import gameController from "./game-controller";
 import uiController from "./ui-controller";
 
 const appController = (function (gameController, uiController) {
-  const userChoiceHandler = function (userChoice) {
-    let score, botChoice, gameOutcome;
-
-    gameController.toggleIsGameActive();
-    botChoice = gameController.generateBotChoice();
-    gameOutcome = gameController.determineOutcome(userChoice, botChoice);
-    score = gameController.updateScore();
-
-    uiController.removePlayAreaBackgroundHTML();
-    uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
-
-    setTimeout(() => {
-      uiController.renderHighlightHTML(gameOutcome);
-      uiController.updateScoreInnerHTML(score);
-      uiController.renderGameOveralyHTML(gameOutcome);
-    }, 1000);
-  };
-
-  const resetBoardHandler = function () {
-    uiController.emptyGameBoardContainer();
-    gameController.toggleIsGameActive();
-    gameController.resetGameOutcome();
-
-    setTimeout(() => {
+  return {
+    init: function () {
+      handleInitialLoad();
       uiController.init();
-    }, 1000);
+      setupEventLiseners();
+    },
   };
 
-  const toggleModalDisplay = function () {
-    let rulesModal = document.querySelector(
-      uiController.domStrings.modalContainer
-    );
-    rulesModal.classList.toggle("display-none");
-  };
+  // ************************************
 
-  const setupEventLiseners = function () {
+  function handleInitialLoad() {
+    let score;
+
+    if (!localStorage.getItem("score")) return;
+
+    score = localStorage.getItem("score");
+
+    gameController.setScore(score);
+    uiController.updateScoreInnerHTML(score);
+  }
+
+  function setupEventLiseners() {
     let rulesButton, playAreaContainer, closeModal;
 
     playAreaContainer = document.querySelector(
@@ -89,26 +75,42 @@ const appController = (function (gameController, uiController) {
 
       localStorage.setItem("score", score.toString());
     });
-  };
+  }
 
-  const handleInitialLoad = function () {
-    let score;
+  function userChoiceHandler(userChoice) {
+    let score, botChoice, gameOutcome;
 
-    if (!localStorage.getItem("score")) return;
+    gameController.toggleIsGameActive();
+    botChoice = gameController.generateBotChoice();
+    gameOutcome = gameController.determineOutcome(userChoice, botChoice);
+    score = gameController.updateScore();
 
-    score = localStorage.getItem("score");
+    uiController.removePlayAreaBackgroundHTML();
+    uiController.triggerGameBoardAnimation(userChoice, botChoice, gameOutcome);
 
-    gameController.setScore(score);
-    uiController.updateScoreInnerHTML(score);
-  };
+    setTimeout(() => {
+      uiController.renderHighlightHTML(gameOutcome);
+      uiController.updateScoreInnerHTML(score);
+      uiController.renderGameOveralyHTML(gameOutcome);
+    }, 1000);
+  }
 
-  return {
-    init: function () {
-      handleInitialLoad();
+  function resetBoardHandler() {
+    uiController.emptyGameBoardContainer();
+    gameController.toggleIsGameActive();
+    gameController.resetGameOutcome();
+
+    setTimeout(() => {
       uiController.init();
-      setupEventLiseners();
-    },
-  };
+    }, 400);
+  }
+
+  function toggleModalDisplay() {
+    let rulesModal = document.querySelector(
+      uiController.domStrings.modalContainer
+    );
+    rulesModal.classList.toggle("display-none");
+  }
 })(gameController, uiController);
 
 appController.init();

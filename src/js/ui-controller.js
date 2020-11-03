@@ -2,6 +2,7 @@ import paperSvg from "../resources/icon-paper.svg";
 import scissorsSvg from "../resources/icon-scissors.svg";
 import rockSvg from "../resources/icon-rock.svg";
 import GAME_OUTCOMES from "./constants";
+import HTML_MARKUP_CONSTANTS from "./ui-constants";
 
 const uiController = (function () {
   const DOM_STRINGS = {
@@ -18,51 +19,56 @@ const uiController = (function () {
     modalClose: ".modal-close",
   };
 
-  const highlightHTML = `
-    <div class="highlight-container highlight-container-%winner%">
-      <div class="highlight highlight-sm highlight-sm-%winner%"></div>
-      <div class="highlight highlight-md highlight-md-%winner%"></div>
-      <div class="highlight highlight-lg highlight-lg-%winner%"></div>
-    </div>
-  `;
+  const {
+    highlightHTML,
+    playAreaBackgroundHTML,
+    choiceHTML,
+    gameOverlayHTML,
+  } = HTML_MARKUP_CONSTANTS;
 
-  const playAreaBackgroundHTML = `
-    <div class="play-area-bg absolute-horizontal-center"></div>
-  `;
-
-  const playerChoicesHTML = `
+  const choicesContainerHTML = `
     <div class="choices-container absolute-horizontal-center">
-      <div class="choice-container paper" data-user-choice="paper">
-        <div class="choice-white-bg">
-          <img src="${paperSvg}" alt="paper" />
-        </div>
-      </div>
-      <div class="choice-container scissors" data-user-choice="scissors">
-        <div class="choice-white-bg">
-          <img src="${scissorsSvg}" alt="scissors" />
-        </div>
-      </div>
-      <div class="choice-container rock" data-user-choice="rock">
-        <div class="choice-white-bg">
-          <img src="${rockSvg}" alt="rock" />
-        </div>
-      </div>
+      ${["rock", "scissors", "paper"]
+        .map(function createChoiceHtml(choiceType) {
+          return formatChoiceType(choiceType);
+        })
+        .join("")}
     </div>
   `;
 
-  const gameOverlayHTML = `
-    <div class="winner-message-container">
-      <p>YOU PICKED</p>
-      <p class="message-right">THE HOUSE PICKED</p>
-    </div>
+  return {
+    domStrings: DOM_STRINGS,
+    init,
+    renderPlayAreaBackgroundHTML,
+    removePlayAreaBackgroundHTML,
+    renderPlayerChoicesHTML,
+    triggerGameBoardAnimation,
+    renderHighlightHTML,
+    updateScoreInnerHTML,
+    renderGameOveralyHTML,
+    emptyGameBoardContainer,
+  };
 
-    <div class="button-container">
-      <h1>%message%</h1>
-      <button class="play-again-button">PLAY AGAIN</button>
-    </div>
-  `;
+  // ******************************************************
 
-  const formatHighlightHTML = function (isPlayerWinner) {
+  function formatChoiceType(choiceType) {
+    const choiceTypeImageUrlMap = {
+      paper: paperSvg,
+      scissors: scissorsSvg,
+      rock: rockSvg,
+    };
+
+    let formattedChoiceHtml = choiceHTML.replace(/%choice-type%/gi, choiceType);
+
+    formattedChoiceHtml = formattedChoiceHtml.replace(
+      "%img-url%",
+      choiceTypeImageUrlMap[choiceType]
+    );
+
+    return formattedChoiceHtml;
+  }
+
+  function formatHighlightHTML(isPlayerWinner) {
     let newHtml;
 
     isPlayerWinner
@@ -70,9 +76,9 @@ const uiController = (function () {
       : (newHtml = highlightHTML.replace(/%winner%/gi, "right"));
 
     return newHtml;
-  };
+  }
 
-  const insertDuplicate = function (userChoice) {
+  function insertDuplicate(userChoice) {
     let svgUrl;
     let choicesContainer = document.querySelector(DOM_STRINGS.choicesContainer);
 
@@ -93,36 +99,36 @@ const uiController = (function () {
     `;
 
     choicesContainer.insertAdjacentHTML("beforeend", newHTML);
-  };
+  }
 
-  const renderPlayAreaBackgroundHTML = function () {
+  function renderPlayAreaBackgroundHTML() {
     document
       .querySelector(DOM_STRINGS.playAreaContainer)
       .insertAdjacentHTML("afterbegin", playAreaBackgroundHTML);
-  };
+  }
 
-  const removePlayAreaBackgroundHTML = function () {
+  function removePlayAreaBackgroundHTML() {
     const playAreaBackgroundNode = document.querySelector(
       DOM_STRINGS.playAreaBackground
     );
 
     playAreaBackgroundNode.parentNode.removeChild(playAreaBackgroundNode);
-  };
+  }
 
-  const renderPlayerChoicesHTML = function () {
+  function renderPlayerChoicesHTML() {
     document
       .querySelector(DOM_STRINGS.playAreaContainer)
-      .insertAdjacentHTML("beforeend", playerChoicesHTML);
-  };
+      .insertAdjacentHTML("beforeend", choicesContainerHTML);
+  }
 
-  const triggerGameBoardAnimation = function (
-    userChoice,
-    botChoice,
-    gameOutcome
-  ) {
+  function triggerGameBoardAnimation(userChoice, botChoice, gameOutcome) {
     let choicesHTMLArr = document.querySelectorAll(".choice-container");
 
-    choicesHTMLArr.forEach((choiceHTML) => {
+    choicesHTMLArr.forEach(addAnimationClass);
+
+    if (gameOutcome === GAME_OUTCOMES.tie) insertDuplicate(userChoice);
+
+    function addAnimationClass(choiceHTML) {
       if (choiceHTML.dataset.userChoice === userChoice) {
         choiceHTML.classList.add("animate-player-choice");
       } else if (choiceHTML.dataset.userChoice === botChoice) {
@@ -130,12 +136,10 @@ const uiController = (function () {
       } else {
         choiceHTML.parentNode.removeChild(choiceHTML);
       }
-    });
+    }
+  }
 
-    if (gameOutcome === GAME_OUTCOMES.tie) insertDuplicate(userChoice);
-  };
-
-  const renderHighlightHTML = function (gameOutcome) {
+  function renderHighlightHTML(gameOutcome) {
     let isPlayerWinner = gameOutcome === GAME_OUTCOMES.win;
 
     if (gameOutcome === GAME_OUTCOMES.tie) return;
@@ -145,15 +149,15 @@ const uiController = (function () {
     document
       .querySelector(DOM_STRINGS.backgroundEffectContainer)
       .insertAdjacentHTML("afterbegin", highlightHTML);
-  };
+  }
 
-  const updateScoreInnerHTML = function (score) {
+  function updateScoreInnerHTML(score) {
     const scoreHTML = document.querySelector(DOM_STRINGS.score);
 
     scoreHTML.innerHTML = score;
-  };
+  }
 
-  const renderGameOveralyHTML = function (gameOutcome) {
+  function renderGameOveralyHTML(gameOutcome) {
     let message, newHTML;
 
     if (gameOutcome === GAME_OUTCOMES.win) {
@@ -169,35 +173,26 @@ const uiController = (function () {
     document
       .querySelector(DOM_STRINGS.gameOverlayContainer)
       .insertAdjacentHTML("beforeend", newHTML);
-  };
+  }
 
-  const emptyGameBoardContainer = function () {
-    const containersToBeEmptied = [
+  function emptyGameBoardContainer() {
+    const containers = [
       document.querySelector(DOM_STRINGS.backgroundEffectContainer),
       document.querySelector(DOM_STRINGS.playAreaContainer),
       document.querySelector(DOM_STRINGS.gameOverlayContainer),
     ];
 
-    containersToBeEmptied.forEach((container) => (container.innerHTML = ""));
-  };
+    containers.forEach(emptyContainerInnerHTML);
 
-  const init = function () {
+    function emptyContainerInnerHTML(container) {
+      container.innerHTML = "";
+    }
+  }
+
+  function init() {
     renderPlayAreaBackgroundHTML();
     renderPlayerChoicesHTML();
-  };
-
-  return {
-    domStrings: DOM_STRINGS,
-    init,
-    renderPlayAreaBackgroundHTML,
-    removePlayAreaBackgroundHTML,
-    renderPlayerChoicesHTML,
-    triggerGameBoardAnimation,
-    renderHighlightHTML,
-    updateScoreInnerHTML,
-    renderGameOveralyHTML,
-    emptyGameBoardContainer,
-  };
+  }
 })();
 
 export default uiController;
